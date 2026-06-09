@@ -1,0 +1,707 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- last updated: 2026-06-10 01:23 -->
+<title>全球宏观事件日程表</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&family=Noto+Sans+SC:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+ :root {
+  --bg-primary: #f3ede2;
+  --bg-secondary: #ece5d8;
+  --bg-card: #ffffff;
+  --bg-card-hover: #faf7f1;
+  --gold: #b8943e;
+  --gold-light: #c9a44e;
+  --gold-dim: #8a7030;
+  --text-primary: #2a2118;
+  --text-secondary: #524840;
+  --text-muted: #7a7068;
+  --border: rgba(0,0,0,0.06);
+  --border-gold: rgba(184,148,62,0.25);
+  --red: #c0392b;
+  --red-bg: rgba(192,57,43,0.06);
+  --orange: #d4760a;
+  --orange-bg: rgba(212,118,10,0.06);
+  --blue: #2e6da4;
+  --blue-bg: rgba(46,109,164,0.06);
+  --green: #27864a;
+  --green-bg: rgba(39,134,74,0.06);
+  --purple: #7b52ab;
+  --purple-bg: rgba(123,82,171,0.06);
+  --teal: #1a8a86;
+  --teal-bg: rgba(26,138,134,0.06);
+  --lime: #6b8a1e;
+  --lime-bg: rgba(107,138,30,0.06);
+  --pink: #b0457a;
+  --pink-bg: rgba(176,69,122,0.06);
+  --today-ring: #b8943e;
+ }
+ * { margin:0; padding:0; box-sizing:border-box; }
+ body {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: 'Noto Sans SC', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+ }
+ body::before {
+  content: '';
+  position: fixed;
+  top: -30%; left: -20%;
+  width: 70vw; height: 70vw;
+  background: radial-gradient(ellipse, rgba(184,148,62,0.06) 0%, transparent 70%);
+  pointer-events: none; z-index: 0;
+ }
+ body::after {
+  content: '';
+  position: fixed;
+  bottom: -20%; right: -15%;
+  width: 60vw; height: 60vw;
+  background: radial-gradient(ellipse, rgba(184,148,62,0.04) 0%, transparent 70%);
+  pointer-events: none; z-index: 0;
+ }
+ .container { max-width: 1360px; margin: 0 auto; padding: 32px 16px 60px; position: relative; z-index: 1; }
+ .calendar-wrapper {
+  background: rgba(255,255,255,0.45);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 20px;
+  padding: 28px 24px;
+  border: 1px solid rgba(255,255,255,0.6);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.06), 0 1px 3px rgba(0,0,0,0.04);
+ }
+ .header { text-align: center; margin-bottom: 36px; position: relative; padding: 24px 0 0; }
+ .header-ornament { display: flex; align-items: center; justify-content: center; gap: 16px; margin-bottom: 24px; }
+ .header-ornament-line { width: 80px; height: 1px; background: linear-gradient(90deg, transparent, var(--gold-dim)); }
+ .header-ornament-line:last-child { background: linear-gradient(90deg, var(--gold-dim), transparent); }
+ .header-ornament-diamond { width: 6px; height: 6px; background: linear-gradient(135deg, var(--gold), var(--gold-light)); transform: rotate(45deg); flex-shrink: 0; opacity: 0.8; box-shadow: 0 0 6px rgba(184,148,62,0.3); }
+ .header-label { font-family: 'Inter', sans-serif; font-size: 10px; letter-spacing: 10px; text-transform: uppercase; color: var(--gold-dim); margin-bottom: 16px; font-weight: 300; }
+ .header-title { font-family: 'Noto Sans SC', sans-serif; font-size: 36px; font-weight: 300; background: linear-gradient(180deg, #8a7030 0%, #b8943e 40%, #d4b060 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 6px; line-height: 1.4; letter-spacing: 6px; }
+ .month-nav { display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 10px; }
+ .month-tab {
+  background: rgba(255,255,255,0.35);
+  border: 1px solid rgba(255,255,255,0.5);
+  border-radius: 20px;
+  padding: 6px 22px;
+  font-family: 'Inter', 'Noto Sans SC', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  letter-spacing: 1px;
+  user-select: none;
+  white-space: nowrap;
+ }
+ .month-tab:hover:not(.active) {
+  background: rgba(255,255,255,0.6);
+  color: var(--text-secondary);
+  border-color: rgba(184,148,62,0.18);
+  box-shadow: 0 2px 8px rgba(184,148,62,0.08);
+ }
+ .month-tab.active {
+  background: linear-gradient(135deg, rgba(184,148,62,0.18) 0%, rgba(212,176,96,0.10) 100%);
+  border: 1px solid rgba(184,148,62,0.40);
+  color: var(--gold-dim);
+  font-weight: 600;
+  box-shadow: 0 2px 12px rgba(184,148,62,0.12);
+  cursor: default;
+ }
+ .header-line { width: 160px; height: 1px; background: linear-gradient(90deg, transparent, var(--gold-dim), transparent); margin: 28px auto 0; }
+ .sub-header { display: flex; justify-content: center; align-items: center; margin: 16px 0 20px; padding: 0 8px; }
+ .sub-header-inst { font-family: 'Inter', sans-serif; font-size: 11px; letter-spacing: 6px; text-transform: uppercase; color: var(--gold); font-weight: 400; }
+ .legend { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px 16px; margin-bottom: 28px; padding: 12px 20px; background: rgba(255,255,255,0.5); border-radius: 10px; border: 1px solid rgba(255,255,255,0.6); }
+.legend-institute { width: 100%; text-align: center; font-family: 'Inter', sans-serif; font-size: 11px; letter-spacing: 6px; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; font-weight: 400; }
+ .legend-item { display: flex; align-items: center; gap: 5px; font-size: 10px; color: var(--text-secondary); font-weight: 400; letter-spacing: 0.3px; }
+ .legend-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; opacity: 0.7; }
+ .click-hint { text-align: center; margin-bottom: 18px; font-size: 10px; color: var(--text-muted); font-weight: 400; letter-spacing: 1px; }
+ .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; margin-bottom: 20px; transition: opacity 0.25s ease, transform 0.25s ease; }
+ .calendar-grid.switching { opacity: 0; transform: translateY(8px); }
+ .weekday-header { text-align: center; padding: 8px 4px 6px; font-size: 10px; font-weight: 500; color: var(--text-muted); letter-spacing: 3px; text-transform: uppercase; font-family: 'Inter', sans-serif; }
+ .day-cell { min-height: 100px; background: rgba(255,255,255,0.65); border: 1px solid rgba(255,255,255,0.7); border-radius: 10px; padding: 6px; position: relative; transition: all 0.25s ease; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.03); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+ .day-cell:hover { background: rgba(255,255,255,0.85); box-shadow: 0 4px 16px rgba(184,148,62,0.10), 0 1px 3px rgba(0,0,0,0.04); transform: translateY(-1px); }
+ .day-cell.empty { background: transparent; border-color: transparent; min-height: 0; box-shadow: none; backdrop-filter: none; }
+ .day-cell.today { background: #fdf4dc; border: 1.5px solid #c9a44e; box-shadow: 0 3px 18px rgba(184,148,62,0.18), inset 0 1px 0 rgba(255,255,255,0.5); }
+ .day-cell.weekend { background: rgba(255,255,255,0.4); }
+ .day-number { font-size: 13px; font-weight: 500; color: var(--gold-dim); margin-bottom: 4px; padding-left: 2px; line-height: 1; letter-spacing: 0.5px; }
+ .day-cell.today .day-number { color: #8a6c1e; font-weight: 700; }
+ .day-number.weekend-num { color: var(--text-muted); opacity: 0.5; }
+ .event-pill { display: flex; align-items: center; gap: 4px; padding: 3px 7px; margin-bottom: 3px; border-radius: 6px; font-size: 10px; line-height: 1.3; cursor: pointer; transition: all 0.2s; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; position: relative; letter-spacing: 0.2px; }
+ .event-pill:hover { transform: scale(1.03); z-index: 5; box-shadow: 0 3px 10px rgba(0,0,0,0.10); }
+ .event-pill.high { font-weight: 600; }
+ .event-pill .pill-flag { width: 14px; height: 10px; flex-shrink: 0; border-radius: 1px; object-fit: cover; box-shadow: 0 0 1px rgba(0,0,0,0.1); }
+ .event-pill .pill-stars { font-size: 7px; color: var(--gold); flex-shrink: 0; letter-spacing: -1px; margin-left: 1px; }
+ .pill-fed { background: var(--red-bg); color: var(--red); }
+ .pill-ecb { background: var(--blue-bg); color: var(--blue); }
+ .pill-boj { background: var(--purple-bg); color: var(--purple); }
+ .pill-boe { background: var(--teal-bg); color: var(--teal); }
+ .pill-boc { background: var(--green-bg); color: var(--green); }
+ .pill-cn { background: var(--orange-bg); color: var(--orange); }
+ .pill-data { background: rgba(184,148,62,0.08); color: var(--gold-dim); }
+ .pill-event { background: var(--lime-bg); color: var(--lime); }
+ .pill-trade { background: var(--pink-bg); color: var(--pink); }
+ .pill-opec { background: rgba(46,109,164,0.08); color: #2e6da4; }
+ .pill-ipo { background: rgba(212,118,10,0.08); color: #d4760a; }
+ .pill-rba { background: rgba(46,109,164,0.06); color: #3a7bd5; }
+ .expand-panel { max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.4s ease, opacity 0.3s ease; background: rgba(255,255,255,0.75); border: 1px solid transparent; border-radius: 12px; margin-bottom: 12px; opacity: 0; backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+ .expand-panel.open { max-height: 600px; border-color: var(--border-gold); padding: 20px 24px 22px; opacity: 1; box-shadow: 0 4px 20px rgba(0,0,0,0.06); }
+ .expand-panel-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+ .expand-panel-header .panel-flag { width: 28px; height: 20px; border-radius: 2px; object-fit: cover; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+ .expand-panel-title { font-size: 15px; font-weight: 600; color: var(--gold-light); letter-spacing: 0.5px; }
+ .expand-panel-date { font-size: 12px; color: var(--text-muted); font-weight: 400; margin-left: auto; }
+ .expand-tag { display: inline-block; font-size: 10px; padding: 2px 8px; border-radius: 4px; font-weight: 500; margin-right: 6px; vertical-align: middle; }
+ .expand-tag.pending { background: rgba(184,148,62,0.06); color: var(--gold-dim); }
+ .expand-tag.released { background: rgba(39,134,74,0.06); color: var(--green); }
+ .expand-body { font-size: 12px; color: var(--text-secondary); line-height: 1.9; font-weight: 300; letter-spacing: 0.2px; }
+ .expand-body strong { color: var(--text-primary); font-weight: 500; }
+ .grid-week-banner { grid-column: 1 / -1; display: flex; align-items: center; gap: 10px; padding: 7px 16px; border-radius: 8px; font-size: 11px; font-weight: 500; letter-spacing: 0.5px; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+ .grid-week-banner .banner-icon { font-size: 13px; flex-shrink: 0; }
+ .grid-week-banner .banner-label { font-weight: 700; letter-spacing: 1px; }
+ .grid-week-banner .banner-sep { width: 1px; height: 12px; background: rgba(0,0,0,0.12); flex-shrink: 0; }
+ .grid-week-banner .banner-detail { font-weight: 400; font-size: 10px; opacity: 0.8; }
+ .grid-week-banner.tech-week { background: linear-gradient(135deg, rgba(107,138,30,0.06) 0%, rgba(184,148,62,0.04) 100%); color: var(--lime); border: 1px solid rgba(107,138,30,0.12); }
+ .grid-week-banner.central-bank-week { background: linear-gradient(135deg, rgba(192,57,43,0.06) 0%, rgba(184,148,62,0.04) 100%); color: var(--red); border: 1px solid rgba(192,57,43,0.12); }
+ .mid-month-box { margin: 12px 0; padding: 12px 18px; background: linear-gradient(135deg, rgba(212,118,10,0.03) 0%, rgba(184,148,62,0.02) 100%); border: 1px solid rgba(212,118,10,0.10); border-radius: 8px; backdrop-filter: blur(8px); }
+ .mid-month-title { font-size: 11px; font-weight: 500; color: var(--orange); margin-bottom: 4px; }
+ .mid-month-pills { display: flex; flex-wrap: wrap; gap: 8px; }
+ .focus-box { margin-top: 28px; padding: 20px 24px; background: rgba(255,255,255,0.55); border-radius: 14px; border: 1px solid rgba(255,255,255,0.6); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+ .focus-title { font-size: 13px; font-weight: 600; color: var(--gold-light); margin-bottom: 14px; letter-spacing: 1px; }
+ .focus-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 10px; }
+ .focus-item { padding: 10px 14px; border-radius: 8px; border-left: 3px solid; background: rgba(255,255,255,0.5); }
+ .focus-item-title { font-size: 11px; font-weight: 600; margin-bottom: 3px; }
+ .focus-item-body { font-size: 10px; color: var(--text-secondary); line-height: 1.6; }
+ .footer { text-align: center; margin-top: 36px; padding-top: 20px; border-top: 1px solid rgba(0,0,0,0.05); }
+ .footer-text { font-size: 10px; color: var(--text-muted); font-weight: 300; line-height: 1.8; }
+ .footer-note { font-size: 9px; color: var(--text-muted); opacity: 0.6; margin-top: 6px; }
+ .fade-in { opacity: 0; transform: translateY(12px); animation: fadeUp 0.5s ease forwards; }
+ @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+ @media (max-width: 1100px) {
+  .calendar-grid { gap: 3px; }
+  .day-cell { min-height: 80px; padding: 4px; }
+  .event-pill { font-size: 9px; padding: 2px 4px; }
+ }
+ @media (max-width: 768px) {
+  .header-title { font-size: 24px; letter-spacing: 4px; }
+  .header-subtitle { font-size: 13px; letter-spacing: 2px; }
+  .calendar-grid { grid-template-columns: repeat(7, 1fr); gap: 2px; }
+  .day-cell { min-height: 60px; padding: 3px; }
+  .event-pill { font-size: 8px; padding: 2px 3px; }
+  .event-pill .pill-flag { width: 10px; height: 7px; }
+  .day-number { font-size: 12px; }
+  .weekday-header { font-size: 9px; }
+  .month-tab { font-size: 12px; padding: 5px 16px; }
+ }
+</style>
+</head>
+<body>
+<div class="container">
+ <div class="header">
+  <div class="header-ornament">
+   <div class="header-ornament-line"></div>
+   <div class="header-ornament-diamond"></div>
+   <div class="header-ornament-line"></div>
+  </div>
+  <div class="header-label">Global Macro Calendar</div>
+  <div class="header-title">全球宏观经济事件日程表</div>
+  <div class="month-nav" id="monthNav"></div>
+  <div class="header-line"></div>
+ </div>
+ <div class="sub-header">
+  <span class="sub-header-inst">BS Commodity Research</span>
+ </div>
+ <div class="legend">
+  <div class="legend-item"><div class="legend-dot" style="background:var(--red)"></div>美联储 Fed</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--blue)"></div>欧央行 ECB</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--purple)"></div>日央行 BOJ</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--teal)"></div>英央行 BOE</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--green)"></div>加央行 BoC</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--orange)"></div>中国 CN</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--gold)"></div>经济数据</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--lime)"></div>重大事件</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--pink)"></div>贸易政策</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#2e6da4"></div>OPEC+</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#d4760a"></div>超级IPO</div>
+ </div>
+ <div class="click-hint">💡 点击日历中的事件，可展开详细解读</div>
+ <div class="calendar-wrapper">
+  <div class="calendar-grid fade-in" id="calendarGrid"></div>
+  <div id="midMonthSection"></div>
+  <div class="expand-panel" id="detailPanel">
+   <div class="expand-panel-header">
+    <img class="panel-flag" id="panelFlag" src="" alt="" style="display:none;">
+    <div class="expand-panel-title" id="panelTitle"></div>
+    <div class="expand-panel-date" id="panelDate"></div>
+   </div>
+   <div class="expand-body" id="panelBody"></div>
+  </div>
+  <div class="focus-box" id="focusBox"></div>
+ </div>
+ <div class="footer">
+  <div class="footer-text">数据来源：Federal Reserve · BLS · BEA · ISM · ECB · BOJ · BOE · OPEC · 国家统计局 · USTR<br>时间均为北京时间（美东时间已转换夏令时）· 日期可能有临时调整</div>
+  <div class="footer-note">★ 影响级别 · ★★★ 极高 · ★★ 高 · ★ 中 · 点击事件可展开解读 · 国旗来源: flagcdn.com</div>
+ </div>
+</div>
+
+<script>
+// ========== MONTH RANGE LOGIC ==========
+const now = new Date();
+const curYear = now.getFullYear();
+const curMonth = now.getMonth() + 1;
+// Visible months: current month + next 2
+const visibleMonths = [];
+for (let i = 0; i < 3; i++) {
+ let m = curMonth + i, y = curYear;
+ if (m > 12) { m -= 12; y++; }
+ visibleMonths.push({ year: y, month: m });
+}
+let currentIdx = 0; // index into visibleMonths
+
+// ========== ALL EVENT DATA ==========
+const allEventData = {
+ // ===== JUNE 2026 =====
+ '2026-6': {
+  events: {
+   1: [{id:'e01',flag:'us',name:'ISM制造业PMI',cls:'pill-data',stars:'★★'},{id:'e02',flag:'us',name:'建筑业支出',cls:'pill-data',stars:''}],
+   2: [{id:'e03',flag:'us',name:'JOLTS职位空缺',cls:'pill-data high',stars:'★★'},{id:'e04',flag:'us',name:'USTR 301关税',cls:'pill-trade high',stars:'★★'}],
+   3: [{id:'e05',flag:'us',name:'美联储褐皮书',cls:'pill-fed',stars:''},{id:'e06',flag:'us',name:'ISM非制造业PMI',cls:'pill-data',stars:'★★'}],
+   4: [],
+   5: [{id:'e07',flag:'us',name:'非农NFP',cls:'pill-fed high',stars:'★★★'}],
+   6: [],
+   7: [{id:'e08',flag:'un',name:'OPEC+会议',cls:'pill-opec',stars:'★★'},{id:'e48',flag:'pe',name:'秘鲁总统决选',cls:'pill-event high',stars:'★★★'}],
+   8: [{id:'e09',flag:'hk',name:'智谱/MiniMax入恒科',cls:'pill-ipo',stars:''},{id:'e10',flag:'jp',name:'日本GDP修正值',cls:'pill-data',stars:'★★'},{id:'e44',flag:'us',name:'232关税新规生效',cls:'pill-trade high',stars:'★★'}],
+   9: [{id:'e12',flag:'us',name:'成屋销售',cls:'pill-data',stars:''},{id:'e13',flag:'cn',name:'中国进出口',cls:'pill-cn high',stars:'★★'}],
+   10: [{id:'e14',flag:'cn',name:'中国CPI/PPI',cls:'pill-cn',stars:'★★'},{id:'e15',flag:'us',name:'美国CPI',cls:'pill-fed high',stars:'★★★'},{id:'e16',flag:'ca',name:'加央行决议',cls:'pill-boc',stars:'★★'}],
+   11: [{id:'e17',flag:'un',name:'⚽世界杯开幕',cls:'pill-event high',stars:'★★'},{id:'e18',flag:'us',name:'美国PPI',cls:'pill-data',stars:'★★'},{id:'e19',flag:'eu',name:'ECB决议',cls:'pill-ecb high',stars:'★★★'},{id:'e20',flag:'us',name:'SpaceX定价',cls:'pill-ipo high',stars:'★★★'}],
+   12: [{id:'e21',flag:'us',name:'SpaceX挂牌SPCX',cls:'pill-ipo high',stars:'★★★'},{id:'e22',flag:'us',name:'密歇根初值',cls:'pill-data',stars:''},{id:'e23',flag:'cn',name:'华为HDC',cls:'pill-event',stars:''}],
+   13: [],
+   14: [],
+   15: [{id:'e24',flag:'us',name:'工业生产',cls:'pill-data',stars:''}],
+   16: [{id:'e25',flag:'jp',name:'日央行决议',cls:'pill-boj high',stars:'★★★'},{id:'e28',flag:'cn',name:'国民经济数据',cls:'pill-cn high',stars:'★★'},{id:'e29',flag:'us',name:'新屋开工',cls:'pill-data',stars:''}],
+   17: [{id:'e30',flag:'us',name:'FOMC决议',cls:'pill-fed high',stars:'★★★'},{id:'e31',flag:'us',name:'零售销售',cls:'pill-data',stars:'★★'}],
+   18: [{id:'e32',flag:'gb',name:'英央行决议',cls:'pill-boe',stars:'★★'}],
+   19: [{id:'e33',flag:'us',name:'Juneteenth休市',cls:'pill-event',stars:''}],
+   20: [{id:'e34',flag:'cn',name:'LPR报价',cls:'pill-cn',stars:'★★'}],
+   21: [],
+   22: [],
+   23: [{id:'e36',flag:'us',name:'消费者信心',cls:'pill-data',stars:''}],
+   24: [{id:'e37',flag:'us',name:'新屋销售',cls:'pill-data',stars:''}],
+   25: [{id:'e38',flag:'us',name:'GDP+PCE',cls:'pill-data high',stars:'★★'},{id:'e39',flag:'us',name:'耐用品订单',cls:'pill-data',stars:''}],
+   26: [{id:'e40',flag:'us',name:'密歇根终值',cls:'pill-data',stars:''}],
+   27: [{id:'e41',flag:'cn',name:'工业效益月报',cls:'pill-cn',stars:''}],
+   28: [],
+   29: [],
+   30: [{id:'e42',flag:'cn',name:'中国PMI',cls:'pill-cn high',stars:'★★'},{id:'e43',flag:'us',name:'JOLTS(5月)',cls:'pill-data',stars:'★★'},{id:'e45',flag:'us',name:'232铜关税报告截止',cls:'pill-trade high',stars:'★★★'}]
+  },
+  weekBanners: [
+   { beforeDay: 8, cls: 'tech-week', icon: '🖥️', label: '科技超级周', detail: '6/8–6/14 · WWDC+HDC+智谱入恒科+SpaceX' },
+   { beforeDay: 15, cls: 'central-bank-week', icon: '🏦', label: '央行超级周', detail: '6/15–6/21 · BOJ+FOMC+BOE 三大央行决议' }
+  ],
+  midMonth: { title: '📅 6月待定日期事件', pills: [
+   {id:'e26',flag:'cn',name:'长鑫存储挂牌(预期)',cls:'pill-ipo high',stars:'★★★'},
+   {id:'e27',flag:'cn',name:'长江存储IPO申请(预期)',cls:'pill-ipo',stars:'★★'},
+   {id:'e35',flag:'cn',name:'社融/M2/信贷(中旬)',cls:'pill-cn',stars:''},
+   {id:'e46',flag:'gn',name:'几内亚铝土矿出口管制',cls:'pill-trade high',stars:'★★★'},
+   {id:'e47',flag:'zw',name:'津巴布韦锂矿出口配额',cls:'pill-trade high',stars:'★★★'}
+  ]},
+  focus: [
+   {bg:'var(--red-bg)',bc:'var(--red)',tc:'var(--red)',title:'通胀博弈',body:'CPI（6/10）预期4.1%或为年内峰值，PPI预期6.5%跳升。世界杯开幕推升食品饮料消费，短期CPI承压'},
+   {bg:'var(--blue-bg)',bc:'var(--blue)',tc:'var(--blue)',title:'ECB转折',body:'欧央行6/11或加息25BP至2.25%，结束八轮降息周期，为2023年9月以来首次加息'},
+   {bg:'var(--purple-bg)',bc:'var(--purple)',tc:'var(--purple)',title:'BOJ加息',body:'日央行6/16可能加息25BP至1%，隔夜掉期定价加息概率88%，年内仍有加息空间'},
+   {bg:'rgba(184,148,62,0.06)',bc:'var(--gold)',tc:'var(--gold-dim)',title:'Fed分歧',body:'4月会议8-4投票为1992年来首次，6月点阵图将揭示利率路径分歧程度'},
+   {bg:'var(--lime-bg)',bc:'var(--lime)',tc:'var(--lime)',title:'⚽ 世界杯CPI效应',body:'美加墨世界杯6/11开幕，650万球迷涌入，预计推升主办国食品饮料、住宿、交通CPI分项'},
+   {bg:'var(--pink-bg)',bc:'var(--pink)',tc:'var(--pink)',title:'301关税复审',body:'USTR 6/2发布新301裁决，拟对含中国在内的60个经济体加征10-12.5%关税；7/5第一批延续申请截止'},
+   {bg:'var(--pink-bg)',bc:'var(--pink)',tc:'var(--pink)',title:'232关税双节点',body:'6/8钢铝铜232新规生效（衍生品扩展+行业减免）；6/30商务部铜市场报告截止，决定后续分阶段关税走向'},
+   {bg:'rgba(212,118,10,0.06)',bc:'#d4760a',tc:'#d4760a',title:'🚀 超级IPO吸金',body:'SpaceX 6/12纳斯达克$750亿史上最大IPO + 长鑫存储科创板295亿元 + 智谱/MiniMax入恒科引12.5-17.5亿美元被动流入'}
+  ]
+ },
+ // ===== JULY 2026 =====
+ '2026-7': {
+  events: {
+   1: [],
+   2: [{id:'j01',flag:'us',name:'NFP(6月)',cls:'pill-fed high',stars:'★★★'},{id:'j23',flag:'us',name:'建筑业支出',cls:'pill-data',stars:''}],
+   3: [{id:'j02',flag:'us',name:'ISM制造业PMI',cls:'pill-data',stars:'★★'},{id:'j24',flag:'us',name:'ISM非制造业PMI',cls:'pill-data',stars:'★★'}],
+   4: [{id:'j03',flag:'us',name:'🇺🇸独立日休市',cls:'pill-event',stars:''},{id:'j25',flag:'un',name:'⚽世界杯1/4决赛',cls:'pill-event',stars:'★★'}],
+   5: [],
+   6: [],
+   7: [{id:'j04',flag:'au',name:'RBA会议',cls:'pill-rba',stars:'★★'},{id:'j26',flag:'un',name:'⚽世界杯半决赛',cls:'pill-event',stars:'★★'}],
+   8: [{id:'j27',flag:'us',name:'FOMC会议纪要',cls:'pill-fed',stars:'★★'}],
+   9: [],
+   10: [{id:'j05',flag:'cn',name:'中国CPI/PPI',cls:'pill-cn',stars:'★★'},{id:'j06',flag:'us',name:'CPI(6月)',cls:'pill-fed high',stars:'★★★'},{id:'j28',flag:'cn',name:'中国进出口',cls:'pill-cn',stars:'★★'}],
+   11: [{id:'j29',flag:'us',name:'密歇根初值',cls:'pill-data',stars:''},{id:'j30',flag:'us',name:'Lime IPO',cls:'pill-ipo',stars:'★★'}],
+   14: [{id:'j07',flag:'us',name:'PPI',cls:'pill-data',stars:'★★'}],
+   15: [{id:'j08',flag:'ca',name:'BoC决议',cls:'pill-boc',stars:'★★'},{id:'j09',flag:'cn',name:'Q2 GDP',cls:'pill-cn high',stars:'★★★'},{id:'j31',flag:'us',name:'零售销售',cls:'pill-data',stars:'★★'}],
+   16: [],
+   17: [{id:'j11',flag:'us',name:'新屋开工',cls:'pill-data',stars:''},{id:'j32',flag:'us',name:'工业生产',cls:'pill-data',stars:''}],
+   18: [],
+   19: [{id:'j33',flag:'un',name:'⚽世界杯决赛',cls:'pill-event high',stars:'★★★'}],
+   20: [{id:'j12',flag:'cn',name:'LPR报价',cls:'pill-cn',stars:'★★'}],
+   21: [],
+   23: [{id:'j13',flag:'eu',name:'ECB决议',cls:'pill-ecb high',stars:'★★★'},{id:'j14',flag:'us',name:'成屋销售',cls:'pill-data',stars:''}],
+   25: [{id:'j15',flag:'us',name:'GDP速报',cls:'pill-data',stars:'★★'},{id:'j34',flag:'us',name:'密歇根终值',cls:'pill-data',stars:''}],
+   28: [{id:'j16',flag:'us',name:'PCE',cls:'pill-fed high',stars:'★★★'}],
+   29: [{id:'j17',flag:'us',name:'消费者信心',cls:'pill-data',stars:''}],
+   30: [{id:'j18',flag:'jp',name:'BOJ决议',cls:'pill-boj high',stars:'★★★'},{id:'j19',flag:'gb',name:'BOE决议',cls:'pill-boe',stars:'★★'}],
+   31: [{id:'j20',flag:'us',name:'JOLTS',cls:'pill-data',stars:'★★'},{id:'j35',flag:'cn',name:'中国PMI',cls:'pill-cn high',stars:'★★'}]
+  },
+  weekBanners: [
+   { beforeDay: 28, cls: 'central-bank-week', icon: '🏦', label: '央行超级周', detail: '7/28–8/1 · FOMC+BOJ+BOE 三大央行决议' }
+  ],
+  midMonth: { title: '📅 7月待定日期事件', pills: [
+   {id:'j21',flag:'cn',name:'社融/M2/信贷(中旬)',cls:'pill-cn',stars:''},
+   {id:'j22',flag:'cn',name:'国民经济数据',cls:'pill-cn',stars:'★★'},
+   {id:'j36',flag:'cn',name:'长鑫存储挂牌(预期)',cls:'pill-ipo high',stars:'★★★'},
+   {id:'j37',flag:'us',name:'Anthropic路演(预期)',cls:'pill-ipo',stars:'★★★'},
+   {id:'j53',flag:'id',name:'印尼RKAB镍配额修订(预期)',cls:'pill-opec high',stars:'★★★'},
+   {id:'j54',flag:'id',name:'印尼镍/煤出口关税',cls:'pill-trade high',stars:'★★★'},
+   {id:'j55',flag:'cl',name:'智利锂矿国有化推进',cls:'pill-trade high',stars:'★★★'},
+   {id:'j56',flag:'cd',name:'刚果钴出口配额执行',cls:'pill-trade high',stars:'★★★'}
+  ]},
+  focus: [
+   {bg:'var(--red-bg)',bc:'var(--red)',tc:'var(--red)',title:'FOMC决议',body:'7/29-30 FOMC会议，6月点阵图后首次决议，是否释放9月降息信号是核心关注'},
+   {bg:'var(--blue-bg)',bc:'var(--blue)',tc:'var(--blue)',title:'ECB利率',body:'7/23 ECB决议，6月加息后是否连续加息，拉加德新闻发布会措辞是关键'},
+   {bg:'var(--purple-bg)',bc:'var(--purple)',tc:'var(--purple)',title:'BOJ政策',body:'7/30日央行决议，6月加息后是否继续加息，日元套利交易平仓风险'},
+   {bg:'var(--orange-bg)',bc:'var(--orange)',tc:'var(--orange)',title:'Q2 GDP',body:'中国7/15公布Q2 GDP，市场预期4.8-5.2%，若低于5%将触发降息降准预期'},
+   {bg:'var(--lime-bg)',bc:'var(--lime)',tc:'var(--lime)',title:'⚽世界杯闭幕',body:'7/19决赛，美加墨世界杯创48队纪录，650万球迷推升CPI分项0.2-0.5个百分点'},
+   {bg:'rgba(212,118,10,0.06)',bc:'#d4760a',tc:'#d4760a',title:'🚀 IPO潮续',body:'Lime 7/11纳斯达克挂牌 + 长鑫存储7月中旬科创板 + Anthropic秘密交表后路演预期'}
+  ]
+ },
+ // ===== AUGUST 2026 =====
+ '2026-8': {
+  events: {
+   1: [],
+   2: [],
+   3: [{id:'a17',flag:'us',name:'ISM制造业PMI',cls:'pill-data',stars:'★★'}],
+   4: [{id:'a01',flag:'au',name:'RBA会议',cls:'pill-rba',stars:'★★'}],
+   5: [{id:'a02',flag:'in',name:'RBI MPC',cls:'pill-data',stars:''},{id:'a18',flag:'us',name:'ISM非制造业PMI',cls:'pill-data',stars:'★★'}],
+   6: [{id:'a03',flag:'gb',name:'BOE决议',cls:'pill-boe',stars:'★★'}],
+   7: [{id:'a04',flag:'us',name:'NFP(7月)',cls:'pill-fed high',stars:'★★★'}],
+   10: [{id:'a05',flag:'cn',name:'中国CPI/PPI',cls:'pill-cn',stars:'★★'}],
+   11: [],
+   12: [{id:'a06',flag:'us',name:'CPI(7月)',cls:'pill-fed high',stars:'★★★'},{id:'a19',flag:'us',name:'FOMC会议纪要',cls:'pill-fed',stars:'★★'}],
+   14: [{id:'a07',flag:'us',name:'PPI',cls:'pill-data',stars:''},{id:'a20',flag:'cn',name:'国民经济数据',cls:'pill-cn',stars:'★★'}],
+   15: [{id:'a21',flag:'us',name:'密歇根初值',cls:'pill-data',stars:''}],
+   17: [],
+   18: [],
+   19: [{id:'a08',flag:'us',name:'新屋开工',cls:'pill-data',stars:''}],
+   20: [{id:'a09',flag:'cn',name:'LPR报价',cls:'pill-cn',stars:'★★'}],
+   21: [{id:'a10',flag:'us',name:'成屋销售',cls:'pill-data',stars:''},{id:'a22',flag:'us',name:'Jackson Hole开幕',cls:'pill-fed high',stars:'★★★'}],
+   22: [{id:'a23',flag:'us',name:'鲍威尔Jackson Hole演讲',cls:'pill-fed high',stars:'★★★'}],
+   24: [],
+   25: [],
+   26: [{id:'a11',flag:'us',name:'耐用品订单',cls:'pill-data',stars:''}],
+   27: [{id:'a12',flag:'us',name:'GDP修正值',cls:'pill-data',stars:'★★'}],
+   28: [{id:'a13',flag:'us',name:'PCE',cls:'pill-fed high',stars:'★★★'}],
+   29: [{id:'a14',flag:'us',name:'消费者信心',cls:'pill-data',stars:''},{id:'a24',flag:'us',name:'密歇根终值',cls:'pill-data',stars:''}],
+   31: [{id:'a15',flag:'cn',name:'中国PMI',cls:'pill-cn high',stars:'★★'}]
+  },
+  weekBanners: [
+   { beforeDay: 21, cls: 'central-bank-week', icon: '🏔️', label: 'Jackson Hole央行年会', detail: '8/21–8/23 · 全球央行年会+鲍威尔演讲' }
+  ],
+  midMonth: { title: '📅 8月待定日期事件', pills: [
+   {id:'a16',flag:'cn',name:'社融/M2/信贷(中旬)',cls:'pill-cn',stars:''},
+   {id:'a25',flag:'us',name:'OpenAI交表(预期)',cls:'pill-ipo high',stars:'★★★'},
+   {id:'a26',flag:'us',name:'Oura Ring IPO(Q3)',cls:'pill-ipo',stars:'★★'},
+   {id:'a27',flag:'au',name:'澳洲关键矿产税激励',cls:'pill-trade',stars:'★★'}
+  ]},
+  focus: [
+   {bg:'var(--red-bg)',bc:'var(--red)',tc:'var(--red)',title:'Jackson Hole',body:'8/21-23全球央行年会，鲍威尔8/22演讲通常释放9月FOMC政策转向信号，是全年最重要央行沟通事件'},
+   {bg:'rgba(184,148,62,0.06)',bc:'var(--gold)',tc:'var(--gold-dim)',title:'夏季CPI',body:'8/12美国7月CPI，通胀是否延续回落趋势，直接影响9月FOMC降息预期'},
+   {bg:'var(--red-bg)',bc:'var(--red)',tc:'var(--red)',title:'PCE通胀',body:'8/28 PCE数据，美联储最关注的通胀指标，若持续回落将确认降息路径'},
+   {bg:'var(--blue-bg)',bc:'var(--blue)',tc:'var(--blue)',title:'GDP修正',body:'8/27 Q2 GDP修正值，速报后的修正可能改变经济放缓叙事'},
+   {bg:'var(--teal-bg)',bc:'var(--teal)',tc:'var(--teal)',title:'央行静默期',body:'8月无FOMC/ECB/BOJ决议，市场消化前期政策信号，关注Fed官员讲话'},
+   {bg:'rgba(212,118,10,0.06)',bc:'#d4760a',tc:'#d4760a',title:'🚀 IPO储备',body:'OpenAI预期9月IPO，8月可能提交S-1；Oura Ring Q3上市；Jersey Mike\'s Q3上市'}
+  ]
+ }
+};
+
+// ========== EVENT DETAIL DATA ==========
+const eventData = {
+ // ===== JUNE =====
+ e01:{flag:'https://flagcdn.com/w40/us.png',title:'ISM制造业PMI',date:'6月1日 周一 22:00',html:'<span class="expand-tag released">已发布</span><strong>📊 5月实际数据：54.0%</strong><br>较4月52.7%上升1.3个百分点，为2022年5月以来最高，连续第五个月扩张。<br><br><strong>关键分项：</strong><br>• 新订单指数继续扩张，需求端保持强劲<br>• 价格分项上升，反映关税传导效应<br>• 就业分项重回扩张区间<br><br><strong>市场解读：</strong>制造业PMI意外强劲，打消了此前的衰退担忧。但价格分项走高引发通胀重燃忧虑。'},
+ e02:{flag:'https://flagcdn.com/w40/us.png',title:'建筑业支出',date:'6月1日 周一 22:00',html:'<span class="expand-tag released">已发布</span><strong>📊 4月实际数据：年化$2,172.4B，环比+0.4%</strong><br>超越市场预期，为连续第二个月增长。<br><br><strong>关键细节：</strong><br>• 数据中心和公共工程支出是主要驱动力<br>• 住宅建筑支出持平，高抵押贷款利率仍压制需求<br>• 非住宅建筑持续走强'},
+ e03:{flag:'https://flagcdn.com/w40/us.png',title:'JOLTS职位空缺',date:'6月2日 周二 22:00',html:'<span class="expand-tag released">已发布</span><strong>📊 4月实际数据：职位空缺762万（+73.1万）</strong><br>创近两年新高，但招聘人数骤降41.9万。<br><br><strong>"高开空缺、低招聘"矛盾：</strong><br>• 职位空缺激增73.1万，但90%以上来自专业和商业服务<br>• 招聘率降至3.2%，接近2020年底疫情低点<br>• 离职率降至1.9%，为2020年8月以来最低'},
+ e04:{flag:'https://flagcdn.com/w40/us.png',title:'USTR 301关税裁决',date:'6月2日 周二',html:'<span class="expand-tag released">已发布</span><strong>📊 6月2日实际结果：</strong>USTR正式发布裁决，认定60个经济体存在"强迫劳动相关贸易行为"，拟加征10%-12.5%关税。<br><br>• 涵盖钢铝、电动汽车、半导体、关键矿产等战略行业<br>• 7月5日第一批延续申请截止'},
+ e05:{flag:'https://flagcdn.com/w40/us.png',title:'美联储褐皮书',date:'6月3日 周三 02:00',html:'<span class="expand-tag released">已发布</span><strong>📊 核心结论：</strong>12个辖区中10个报告"轻微至温和增长"。<br><br><strong>最令人不安的变化——通胀加速：</strong><br>• 多数辖区价格涨幅高于上一份褐皮书<br>• 主要驱动：中东冲突推升能源成本<br>• "增长慢+通胀顽固"是最糟糕的组合'},
+ e06:{flag:'https://flagcdn.com/w40/us.png',title:'ISM非制造业PMI',date:'6月3日 周三 22:00',html:'<span class="expand-tag released">已发布</span><strong>📊 5月实际数据：54.5%</strong><br>较4月53.6%上升0.9个百分点，高于市场预期的53.8%。<br><br>服务业持续扩张，支撑占GDP 80%的服务业韧性。但价格分项走高意味着通胀顽固。'},
+ e07:{flag:'https://flagcdn.com/w40/us.png',title:'非农就业报告 (NFP)',date:'6月5日 周五 20:30',html:'<span class="expand-tag released">已发布</span><strong>📊 5月实际数据：</strong><br>• 新增非农就业：<strong>172,000</strong>（预期80,000）<br>• 失业率：<strong>4.3%</strong><br>• 平均时薪同比：<strong>+3.4%</strong><br><br>4月数据大幅上修64,000至179,000。强劲就业数据让美联储继续"观望等待"。'},
+ e08:{flag:'https://flagcdn.com/w40/un.png',title:'OPEC+第41届部长级会议',date:'6月7日 周日',html:'<span class="expand-tag released">已决议</span><strong>📊 实际结果：</strong>七个OPEC+国家同意从7月起增产188,000桶/日。首次无阿联酋参与，沙特独自承担更多减产份额。<br><br><strong>对宏观的影响：</strong><br>• 增产188,000桶/日约为全球供应的0.2%，幅度温和，不会逆转油价走势<br>• 油价维持区间震荡（$70–80/桶）→对美国CPI中的能源分项拖累有限，有助于通胀继续缓和<br>• 沙特若未来单独扩大增产，可能使油价破$70，加速通胀下行，为美联储提前降息创造条件<br><br><strong>对资金的影响：</strong><br>• 增产幅度低于激进派预期（曾讨论增产300,000+桶/日）→油价未大跌，能源股短期稳定<br>• ExxonMobil、雪佛龙等油气股未受明显冲击，能源板块资金无大规模出逃'},
+ e09:{flag:'https://flagcdn.com/w40/hk.png',title:'智谱/MiniMax纳入恒生科技指数',date:'6月8日 周一',html:'<span class="expand-tag released">已生效</span>恒生指数公司季度检讨结果正式生效，智谱AI和MiniMax纳入恒生科技指数成分股。<br><br><strong>资金影响：</strong><br>• 被动追踪恒生科技指数的ETF（如3032.HK）必须强制买入，预计流入<strong>12.5–17.5亿美元</strong><br>• 这属于纯被动增量资金，不受市场情绪影响，对股价有确定性支撑<br>• 主动基金为避免"持仓偏离"也倾向跟进，形成二次流入效应<br><br><strong>宏观影响：</strong><br>• 中国AI公司获国际指数体系认可，提振市场对中国科技股的风险偏好<br>• 短期港股科技板块资金面明显改善，对恒科指数其他成分股也有情绪溢出'},
+ e10:{flag:'https://flagcdn.com/w40/jp.png',title:'日本一季度GDP（修正值）',date:'6月8日 周一 07:50',html:'<span class="expand-tag released">已发布</span><strong>📊 实际数据：年化增长1.8%</strong><br>较速报值2.1%下修0.3个百分点，但高于预期的1.3-1.4%。资本支出环比萎缩0.7%为主要拖累。1.8%仍高于预期，支撑日央行6/16加息。'},
+ e12:{flag:'https://flagcdn.com/w40/us.png',title:'美国成屋销售',date:'6月9日 周二 22:00',html:'<span class="expand-tag released">已发布</span><strong>📊 5月实际数据：年化402万套，环比持平</strong><br>与4月修正值402万套持平，略低于市场预期405万套。<br><br><strong>关键细节：</strong><br>• 成屋中位价$417,700，较4月$409,100上涨2.1%，同比继续走高<br>• 库存147万套（环比+5.8%），供应月数4.4个月<br>• 抵押贷款利率受中东冲突推升国债收益率影响而走高，对销售形成压制<br><br><strong>市场解读：</strong>成屋销售持平反映利率上行对需求端的制约。NAR首席经济学家Lawrence Yun表示住房可负担性持续改善，收入增长超过房价涨幅，但能源价格飙升推高的长端利率短期仍构成阻力。整体地产复苏步伐偏慢。'},
+ e13:{flag:'https://flagcdn.com/w40/cn.png',title:'中国5月进出口数据',date:'6月9日 周二',html:'<span class="expand-tag released">已发布</span><strong>📊 5月实际数据：</strong><br>• 出口同比<strong>+19.4%</strong>（大幅超预期）<br>• 进口同比<strong>+27.4%</strong><br>• 贸易顺差1,054.3亿美元<br><br>集成电路和计算机出口是主要拉动力——AI产业链出口强劲。'},
+ e14:{flag:'https://flagcdn.com/w40/cn.png',title:'中国CPI / PPI',date:'6月10日 周三 09:30',html:'<span class="expand-tag pending">待发布</span><strong>5月关注点：</strong><br>• CPI机构预测1.2%-1.4%（4月实际1.2%），食品价格好于季节性，猪肉企稳、鸡蛋大涨13.7%<br>• PPI机构预测3.5%-4.0%（4月实际2.8%），能源低基数+有色金属走强是主要上行驱动力<br>• CPI温和修复但非终端需求走强，PPI加速回升受输入性通胀主导'},
+ e15:{flag:'https://flagcdn.com/w40/us.png',title:'美国CPI',date:'6月10日 周三 20:30',html:'<span class="expand-tag pending">待发布</span><strong>为什么是★★★最高影响？</strong><br>CPI直接决定美联储利率决策。6/17 FOMC前最后一次CPI数据。<br><br>• 机构预测同比<strong>4.2%</strong>（4月实际3.8%），若实现将破4%为年内峰值<br>• <strong>核心CPI</strong>预测2.9%（4月实际2.8%）<br>• 能源最强上行引擎：中东冲突推升汽油、航油；关税传导推高新车/二手车、家电价格<br>• CPI>4.3%→降息预期归零；CPI<3.8%→狂欢式上涨'},
+ e16:{flag:'https://flagcdn.com/w40/ca.png',title:'加拿大央行利率决议',date:'6月10日 周三',html:'<span class="expand-tag pending">待决议</span>加央行宣布利率决议，当前2.25%，预期维持不变。<br><br>加央行是G7中最先降息的央行之一，其政策路径对美联储有参考价值。'},
+ e17:{flag:'https://flagcdn.com/w40/un.png',title:'⚽ 2026世界杯开幕',date:'6月11日 周四',html:'<span class="expand-tag pending">待开幕</span>美加墨联合举办，6/11至7/19，首次48支球队104场比赛。<br><br><strong>宏观影响：</strong><br>• 预计650万球迷涌入，推升CPI分项0.2-0.5个百分点<br>• 啤酒、零食、大屏电视等品类短期消费激增'},
+ e18:{flag:'https://flagcdn.com/w40/us.png',title:'美国PPI',date:'6月11日 周四 20:30',html:'<span class="expand-tag pending">待发布</span>预期同比跳升至6.5%，较4月大幅上升。关税成本传导可能在PPI中首先体现。PPI领先CPI约2-3个月。'},
+ e19:{flag:'https://flagcdn.com/w40/eu.png',title:'欧央行利率决议',date:'6月11日 周四 20:45',html:'<span class="expand-tag pending">待决议</span>当前利率2.00%，隔夜掉期定价加息25BP概率92%。<br><br>若加息至2.25%，将是<strong>2023年9月以来首次加息，结束连续八轮降息周期</strong>。<br><br><strong>对宏观的影响：</strong><br>• 欧央行转向加息→欧元区利率差收窄，欧元/美元汇率升值压力上升<br>• 欧元走强对欧洲出口商（大众、LVMH等）形成盈利压制，但缓解进口通胀<br>• 加息信号确认欧元区通胀持续性超预期，改变市场对欧洲降息路径的定价<br><br><strong>对资金的影响：</strong><br>• 欧元区加息→欧元计价资产吸引力上升，部分国际资金从美元资产转向欧元区<br>• 欧洲国债（德债/法债）收益率上行，全球债券市场面临调整压力<br>• 关注拉加德新闻发布会是否暗示7月继续加息；若措辞偏鹰→欧元区股市（DAX、CAC40）承压'},
+ e20:{flag:'https://flagcdn.com/w40/us.png',title:'SpaceX定价（史上最大IPO）',date:'6月11日 周四',html:'<span class="expand-tag pending">待定价</span>SpaceX 6/11定价，6/12纳斯达克挂牌，代码SPCX。募资<strong>750亿美元</strong>，估值<strong>1.77万亿美元</strong>，超越谷歌IPO成为史上最大科技IPO。<br><br><strong>资金虹吸效应（极重要）：</strong><br>• 750亿美元认购资金在定价前被冻结，相当于纳斯达克<strong>约15%日成交量</strong>，中小盘股面临短期流动性抽水<br>• 机构投资者需腾挪仓位为SPCX分配权重，特斯拉（TSLA）、Palantir等马斯克概念股面临调仓卖压<br>• 挂牌30天后纳入纳斯达克100指数，届时将触发追踪QQQ的被动资金强制买入，规模预计<strong>200–300亿美元</strong><br><br><strong>宏观影响：</strong><br>• 750亿美元募资为市场注入大量新供给，短期对科技股整体估值有压制<br>• 成功上市将强化"AI+太空经济"叙事，带动相关产业链板块估值重估<br>• 若IPO定价超预期→市场risk-on情绪升温；若上市破发→科技股整体承压'},
+ e21:{flag:'https://flagcdn.com/w40/us.png',title:'SpaceX挂牌上市 (SPCX)',date:'6月12日 周五',html:'<span class="expand-tag pending">待上市</span>SpaceX正式纳斯达克挂牌，定价$135/股，估值1.77万亿美元。<br><br><strong>首日行情预判：</strong><br>• 首日预计涨幅15–30%，打开后可能触发散户跟风，成交量极大<br>• 马斯克其他公司（TSLA）可能联动下跌——机构调仓从TSLA换入SPCX<br><br><strong>资金影响（短期/中期双重效应）：</strong><br>• <strong>短期（上市当日）：</strong>冻结资金解冻，市场流动性暂时回升；但若上市价远超定价，则新资金追入继续消耗流动性<br>• <strong>中期（30天后）：</strong>纳入纳斯达克100触发被动资金强制买入约200–300亿美元，QQQ/IVV等ETF必须增持<br>• <strong>对小盘股的影响：</strong>机构仓位腾挪压力持续约2–4周，Russell 2000相对跑输风险<br><br><strong>宏观影响：</strong><br>• SPCX上市本身不影响货币政策，但若市值快速膨胀至$2T+，将对标普500指数权重产生系统性重构效应<br>• 太空经济资本化加速，Starlink等子业务估值提升，卫星互联网、低轨通信等产业链受益'},
+ e22:{flag:'https://flagcdn.com/w40/us.png',title:'密歇根消费者信心指数（初值）',date:'6月12日 周五 22:00',html:'<span class="expand-tag pending">待发布</span>由密歇根大学每月发布。特别关注1年期通胀预期分项——若高于3.5%将引发美联储警惕。5月终值67.4为六个月新低。'},
+ e23:{flag:'https://flagcdn.com/w40/cn.png',title:'华为HDC 2026开发者大会',date:'6月12-14日',html:'<span class="expand-tag pending">待举办</span>华为年度开发者大会，6/12-14东莞松山湖。<br><br><strong>重要发布预期：</strong>鸿蒙OS 5.0正式版 · 华为AI大模型（盘古5.0）· 鸿蒙PC正式版 · 鸿蒙生态应用市场数据<br><br><strong>对宏观的影响：</strong><br>• 鸿蒙PC若正式推出，将加速国内操作系统的国产替代进程，对微软Windows在华份额构成直接压力<br>• 华为AI大模型迭代速度反映中国AI产业链的自主研发能力，政策层面意义重大<br><br><strong>对资金的影响：</strong><br>• 若鸿蒙/AI发布超预期→华为产业链概念股（华勤技术、中软国际、沪硅产业等）强势拉升<br>• 若AI大模型发布亮眼→A股AI应用赛道资金情绪大幅提振，资金从AI基础设施向应用层迁移<br>• 与SpaceX上市同日，科技情绪双重叠加，A股/港股科技板块当日有望出现显著资金流入'},
+ e24:{flag:'https://flagcdn.com/w40/us.png',title:'工业生产与产能利用率',date:'6月15日 周一 21:15',html:'<span class="expand-tag pending">待发布</span>产能利用率超过80%通常预示通胀压力。4月产能利用率78.3%，5月若回升至80%以上将释放通胀警告信号。'},
+ e25:{flag:'https://flagcdn.com/w40/jp.png',title:'日本央行利率决议',date:'6月16日 周二',html:'<span class="expand-tag pending">待决议</span>当前利率0.75%，加息25BP至1.00%概率88%。<br><br>若加息，日央行利率将达<strong>1.00%，为2007年以来最高</strong>。<br><br><strong>对宏观的影响：</strong><br>• 日本央行持续加息→日本结束"失去的30年"利率常态化，对全球债券市场具有重要参照意义<br>• 日元走强将推升日本进口成本，但有助于抑制进口通胀（日本CPI超预期是加息的核心逻辑）<br>• 日本国内储蓄利率上升→日本居民增加储蓄，消费可能边际承压<br><br><strong>对资金的影响（重要！）：</strong><br>• <strong>日元套利交易（Carry Trade）平仓风险</strong>：过去十年全球资金借入低息日元，投资美股/美债/新兴市场。日元升值迫使平仓，引发连锁抛售<br>• 2024年7月加息曾导致全球股市单周暴跌4%，日经指数单日跌12%——历史教训深刻<br>• 若本次日元在加息后急升至145以下，预计引发：纳指-2%至-4%、美债收益率小幅下行（避险）、新兴市场货币承压<br>• 植田和男的前瞻指引措辞至关重要：若暗示年内再加息→平仓风险加剧'},
+ e26:{flag:'https://flagcdn.com/w40/cn.png',title:'长鑫存储科创板挂牌（预期）',date:'6月中旬 待定',html:'<span class="expand-tag pending">预期中</span>长鑫存储5/27已过会并提交注册，预计6月中旬至7月科创板挂牌，<strong>募资295亿元</strong>，为科创板历史第二大IPO。<br><br><strong>战略意义：</strong>中国存储芯片第一股，打破韩美对DRAM的垄断，是中国半导体自主化的里程碑式事件。<br><br><strong>资金影响：</strong><br>• 295亿元新股申购将冻结科创板市场约<strong>3,000–5,000亿元</strong>打新资金（按中签率估算），申购期间A股流动性短期趋紧<br>• 上市后纳入科创50指数，触发相关ETF被动买入；纳入沪深300后规模更大<br>• 与SpaceX IPO形成中美"超级IPO"共振，可能同步压制A股/港股中小盘流动性<br><br><strong>宏观影响：</strong><br>• 长鑫存储上市有助于A股半导体板块形成"国产替代"定价新锚，板块整体估值有提振效应<br>• 政府通过资本市场支持半导体自主化的政策意图明确，有利于提振市场对科技板块的信心<br>• 打新冻结期结束后，资金回流中小盘，形成短期流动性改善效应'},
+ e27:{flag:'https://flagcdn.com/w40/cn.png',title:'长江存储提交IPO申请（预期）',date:'6月中旬 待定',html:'<span class="expand-tag pending">预期中</span>长江存储——中国NAND闪存龙头，预计6月中旬提交科创板IPO申请。<br><br><strong>基本情况：</strong>长江存储是武汉长存主体，已量产232层3D NAND闪存，产能逐步爬坡。受美国出口管制限制，公司国内资本市场融资意愿强烈。<br><br><strong>提交申请的市场影响：</strong><br>• 申请本身不直接冻结资金，但会引发半导体板块情绪性拉升，相关存储/设备/材料股联动上涨<br>• 释放的政策信号极强：监管层在存储芯片敏感时期批准上市申请，意味着半导体板块IPO"绿灯"明确<br><br><strong>资金影响（远期）：</strong><br>• 若成功上市，预计募资规模不低于长鑫存储（≥200亿元），届时打新冻结资金规模庞大<br>• 长鑫（DRAM）+长江（NAND）若同期在市，A股将形成完整的国产存储芯片投资组合，机构可能减持韩国三星/SK海力士ADR来增配<br><br><strong>宏观影响：</strong><br>• 中国存储芯片自主化提速，对全球存储芯片供需格局（三星/SK/美光）构成中长期竞争压力<br>• 配合政府"大基金三期"持续注资，半导体产业资本开支周期进入新高峰'},
+ e28:{flag:'https://flagcdn.com/w40/cn.png',title:'中国国民经济运行情况',date:'6月16日 周二 10:00',html:'<span class="expand-tag pending">待发布</span>国家统计局每月中旬发布，包括工业增加值、社会消费品零售总额、固定资产投资、房地产开发投资与销售。数据超预期→A股反弹+人民币走强。'},
+ e29:{flag:'https://flagcdn.com/w40/us.png',title:'美国新屋开工',date:'6月16日 周二 20:30',html:'<span class="expand-tag pending">待发布</span>新屋开工对利率高度敏感——抵押贷款利率下降→开工回升是地产复苏确认信号。'},
+ e30:{flag:'https://flagcdn.com/w40/us.png',title:'美联储FOMC利率决议',date:'6月17日 周三 02:00',html:'<span class="expand-tag pending">待决议</span><strong>6月最重要事件。</strong><br>• 4月会议8-4投票为1992年来首次如此分裂<br>• 本次会议发布<strong>点阵图（Dot Plot）</strong><br>• 点阵图将揭示降息时点：9月？12月？还是2027年？<br><br><strong>对宏观的影响：</strong><br>• 鸽派点阵图（2次降息）→利率下行预期确立，美债收益率回落，美元走弱，全球风险资产整体受益<br>• 鹰派点阵图（0次降息）→高利率维持更久，企业融资成本压力延续，美债收益率上行，美元走强<br>• 新闻发布会上鲍威尔对"经济软着陆"信心的表述，影响市场对Q3-Q4 GDP走势的预判<br><br><strong>对资金的影响：</strong><br>• <strong>鸽派→</strong>美股大涨（科技成长股领涨）、黄金上涨、美债上涨（收益率↓）、美元下跌<br>• <strong>鹰派→</strong>美股回调（尤其高估值AI股）、美债下跌（收益率↑）、美元走强、新兴市场承压<br>• 点阵图每个格位都代表一名委员预测：若中位值从"1次"升至"2次"降息，市场将剧烈反应<br>• 此为BOJ加息（6/16）后第二天，若两者均偏鸽→双重利好；若BOJ鹰+FOMC鸽→日元套利平仓+美债上涨并存'},
+ e31:{flag:'https://flagcdn.com/w40/us.png',title:'美国零售销售',date:'6月17日 周三 20:30',html:'<span class="expand-tag pending">待发布</span>消费占美国GDP的70%，零售销售是GDP增长最直接的同步指标。核心零售（剔除汽车和汽油）更反映趋势。'},
+ e32:{flag:'https://flagcdn.com/w40/gb.png',title:'英国央行利率决议',date:'6月18日 周四 19:00',html:'<span class="expand-tag pending">待决议</span>当前利率3.75%，预期维持不变。英国通胀CPI 3.2%，是G7中通胀最顽固的国家之一。关注投票比例。'},
+ e33:{flag:'https://flagcdn.com/w40/us.png',title:'Juneteenth 美国假日',date:'6月19日 周五',html:'六月节联邦法定假日，美股美债休市一日。央行超级周后的喘息日，全球流动性降低。'},
+ e34:{flag:'https://flagcdn.com/w40/cn.png',title:'中国LPR报价',date:'6月20日 周六',html:'<span class="expand-tag pending">待发布</span>当前1年期3.0%/5年期3.5%。若5月经济数据偏弱，央行可能通过压缩加点方式降LPR 5-10BP。'},
+ e35:{flag:'https://flagcdn.com/w40/cn.png',title:'中国5月金融数据（社融/M2/信贷）',date:'6月中旬 待定',html:'<span class="expand-tag pending">待发布</span>三大核心指标：社融、M2、新增人民币贷款。关注社融增速是否回升、居民中长期贷款（≈房贷）是否企稳、M1增速。'},
+ e36:{flag:'https://flagcdn.com/w40/us.png',title:'美国消费者信心指数',date:'6月23日 周二 22:00',html:'<span class="expand-tag pending">待发布</span>由世界大型企业联合会每月发布，侧重就业市场感知和收入预期。若FOMC后消费者信心回升→消费股利好。'},
+ e37:{flag:'https://flagcdn.com/w40/us.png',title:'美国新屋销售',date:'6月24日 周三 22:00',html:'<span class="expand-tag pending">待发布</span>统计新建住宅的签约销售量，反映需求端，对抵押贷款利率最敏感。'},
+ e38:{flag:'https://flagcdn.com/w40/us.png',title:'GDP第三次估算 + PCE平减指数',date:'6月25日 周四 20:30',html:'<span class="expand-tag pending">待发布</span>PCE平减指数是美联储官方通胀指标。Q1核心PCE若上修→确认通胀顽固→7月降息概率进一步降低。同时发布个人收入与支出数据。'},
+ e39:{flag:'https://flagcdn.com/w40/us.png',title:'美国耐用品订单（初值）',date:'6月25日 周四 20:30',html:'<span class="expand-tag pending">待发布</span>企业投资领先指标——订单→生产→GDP有1-2个季度时滞。剔除国防和运输的核心耐用品订单更能反映趋势。'},
+ e40:{flag:'https://flagcdn.com/w40/us.png',title:'密歇根消费者信心指数（终值）',date:'6月26日 周五 22:00',html:'<span class="expand-tag pending">待发布</span>终值通常与初值偏差±1-2点。关注5年期通胀预期分项——若高于3.0%将持续压制降息预期。'},
+ e41:{flag:'https://flagcdn.com/w40/cn.png',title:'中国工业经济效益月度报告',date:'6月27日 周六 09:30',html:'<span class="expand-tag pending">待发布</span>工业企业利润是A股盈利周期的领先指标。利润率变化反映上游原材料成本传导和下游需求强弱。'},
+ e42:{flag:'https://flagcdn.com/w40/cn.png',title:'中国PMI',date:'6月30日 周二 09:30',html:'<span class="expand-tag pending">待发布</span>PMI是每月最早发布的经济数据。5月制造业PMI 49.5处于收缩区间，6月能否重回50是经济企稳的关键信号。'},
+ e43:{flag:'https://flagcdn.com/w40/us.png',title:'JOLTS职位空缺（5月）',date:'6月30日 周二 22:00',html:'<span class="expand-tag pending">待发布</span>5月JOLTS将完整反映非农就业报告后的劳动力市场状态。作为7月FOMC前的重要数据，将影响市场对下半年利率路径的判断。'},
+ e44:{flag:'https://flagcdn.com/w40/us.png',title:'232关税新规生效',date:'6月8日 周日',html:'<span class="expand-tag released">已生效</span><strong>📊 实际结果：</strong>6月1日白宫发布公告，对钢铝铜232关税体系启动全面改革，<strong>6月8日正式生效</strong>至2027年12月31日。<br><br><strong>核心变化：</strong><br>• <strong>衍生品扩展</strong>：钢制货架、铝制平版印刷版新增纳入征收范围<br>• <strong>行业减免</strong>：农业设备、住宅HVAC系统及组件、特定工业机械享受15%优惠税率（标准25%→15%）<br>• <strong>美国成分阈值放宽</strong>：从95%降至85%，更多含美国金属的产品可享关税优惠<br>• <strong>贸易伙伴差别化</strong>：欧盟/英国/日本/韩国等进口整体关税上限15%；USMCA合格加墨进口仅对非美国成分征税<br><br><strong>对宏观的影响：</strong><br>• 衍生品扩展→进口成本上升，推高美国国内钢铝铜下游产品价格，对PPI和CPI有上行压力<br>• 行业减免信号明确：政府试图在"保护国内金属产业"与"控制下游成本"间寻求平衡<br>• 欧盟/日韩获15%上限→贸易伙伴关系有所缓和，但中国未获任何豁免，中美贸易摩擦路径不变<br><br><strong>对资金的影响：</strong><br>• 美国钢铝企业（NUE、STLD、AA）短期受益于进口替代效应，股价有支撑<br>• 依赖进口金属的下游制造商（农机、HVAC）成本压力缓解，盈利预期改善<br>• 中国铜铝出口企业面临更高关税壁垒，港股/ A股相关板块承压<br>• 铜价：COMEX vs LME价差维持高位，套利资金继续涌入COMEX铜合约'},
+ e45:{flag:'https://flagcdn.com/w40/us.png',title:'232铜关税商务部报告截止',date:'6月30日 周一',html:'<span class="expand-tag pending">待报告</span><strong>6月最关键贸易政策节点之一。</strong><br>根据2025年7月总统公告，商务部长须在<strong>6月30日前</strong>向总统提交国内铜市场更新报告，包括精炼能力和精炼铜市场状况。<br><br>总统收到报告后，有权决定是否对精炼铜实施<strong>分阶段加征关税</strong>——这是后续铜关税税率调整的核心锚点。<br><br><strong>对宏观的影响：</strong><br>• 若报告建议加征→铜关税可能从当前50%进一步上调或扩大范围，推升美国国内铜价，间接推高电力/新能源/建筑成本<br>• 铜价是全球制造业PMI的晴雨表：铜关税升级→全球铜价分化（COMEX溢价扩大），压制非美制造业复苏<br>• 中国是全球最大铜消费国，美国铜关税加码将影响全球铜贸易流向，LME铜可能因需求转移而短期承压<br><br><strong>对资金的影响：</strong><br>• 铜矿股（FCX、TECK）提前计价关税升级预期，报告前可能拉升<br>• COMEX铜合约持仓量已处高位，报告结果公布后可能引发剧烈波动（多空博弈加剧）<br>• 中国铜相关企业（紫金矿业、江西铜业）面临出口环境恶化风险，港股资金可能提前撤离<br>• 建议进口商在Q3合同中加入税率变动的contingency条款——这是市场普遍预期的操作'},
+ e46:{flag:'https://flagcdn.com/w40/gn.png',title:'几内亚铝土矿出口管制方案出台',date:'6月 待定',html:'<span class="expand-tag pending">待出台</span><strong>2026年全球铝产业链最重大的供给端政策冲击。</strong><br><br>5月25日，几内亚矿业与地质部长布纳·西拉明确表态：计划于6月正式出台铝土矿出口管制改革方案，核心目标是<strong>限制出口量、推高铝土矿价格、推动本土深加工</strong>。<br><br><strong>方案核心内容（预期）：</strong><br>• 2026年出口总量上限<strong>1.5亿吨</strong>，较2025年实际出口1.83亿吨减少约3,300万吨，降幅<strong>约18%</strong><br>• 推进本土氧化铝精炼厂建设，已有3座规划/在建<br>• "供应绝不能超过需求"——几内亚从"量"向"价"转变<br><br><strong>对宏观的影响：</strong><br>• 几内亚占全球铝土矿产量~25%，中国铝土矿进口依存度超50%且主要来自几内亚，出口削减18%将直接冲击中国氧化铝→电解铝供给链<br>• 氧化铝期货5/26已应声暴涨5%（ao2609触及2865元/吨），若管制正式落地，氧化铝价格中枢可能永久上移<br>• 电解铝成本抬升→传导至铝材下游（建筑型材、汽车铝板、光伏铝边框），推升制造业PPI<br>• 几内亚资源民族主义与印尼RKAB削减、刚果钴配额形成"资源国收紧"共振，全球有色金属供给弹性系统性下降<br><br><strong>对资金的影响：</strong><br>• 氧化铝/电解铝期货多单持有者直接受益，氧化铝主力合约波动率将大幅上升<br>• 中国铝企（中国铝业、南山铝业）成本端承压，但自有铝土矿企业（中国铝业几内亚Boffa矿）相对受益<br>• 几内亚本土精炼厂建设→中资工程公司（中国铝业国际、中色股份）可能获得新订单<br>• 关注方案细节：若出口上限超1.6亿吨→利空氧化铝；若低于1.4亿吨→氧化铝可能突破3000元/吨'},
+ e47:{flag:'https://flagcdn.com/w40/zw.png',title:'津巴布韦锂矿出口配额制落地执行',date:'6月 待定',html:'<span class="expand-tag pending">待执行</span><strong>非洲资源民族主义在锂矿领域的标志性事件。</strong><br><br>2月25日津巴布韦矿业部宣布暂停所有锂原矿及精矿出口；4月14日副矿业部长Fred Moyo确认对6家中资企业（中矿资源、盛新锂能等）"软解除"禁令，但附加<strong>11项严格条件</strong>。<br><br><strong>配额制核心条件：</strong><br>• 企业须书面承诺在<strong>2027年1月1日前</strong>建成硫酸锂加工厂，否则全面禁止出口<br>• 锂精矿出口征收<strong>10%出口税</strong><br>• 政府对每家生产商分配出口配额，企业月度提交进展报告<br>• 全面申报矿产成分，出口收益全额汇回<br>• 三个月内建立矿山化验室<br><br><strong>对宏观的影响：</strong><br>• 津巴布韦2025年占中国锂精矿进口约19%，全球锂资源产量占比约12%，配额制实质收紧供给<br>• 2027年1月"硫酸锂工厂大限"若未达标→精矿出口全面禁止→全球锂供给再收缩，锂价获得支撑<br>• 非洲资源民族主义从钴（刚果）→镍（印尼）→锂（津巴布韦）形成全面传导，全球新能源金属供应链"资源国议价权上升"趋势确立<br><br><strong>对资金的影响：</strong><br>• 已获配额的6家中资企业短期出口恢复，股价可能修复；但10%出口税侵蚀利润率<br>• 未获配额的中小矿企面临停产风险，津巴布韦锂矿概念股分化加剧<br>• 碳酸锂期货在配额落地后波动加大，锂价底部支撑增强<br>• 关注中矿资源、盛新锂能等公司硫酸锂工厂建设进展——2027年截止日是远期博弈关键'},
+ e48:{flag:'https://flagcdn.com/w40/pe.png',title:'秘鲁总统决选',date:'6月7日 周六',html:'<span class="expand-tag released">已决选</span><strong>全球第二大铜生产国政治方向的关键抉择。</strong><br><br>4月12日首轮选举无人过半，6月7日进入第二轮决选：右翼藤森庆子（人民力量党）vs 左翼罗伯托·桑切斯（一起为了秘鲁）。<br><br><strong>矿业政策核心分歧：</strong><br>• <strong>藤森庆子（右翼）</strong>：维持矿业开放政策，吸引外资，延续现有矿业合同框架<br>• <strong>桑切斯（左翼）</strong>：提出加强矿业环境监管、提高资源收益分配、审查现有矿业合同<br>• 两人在矿权回收、社区分配、非正规采矿等议题上立场严重分化<br><br><strong>对宏观的影响：</strong><br>• 秘鲁铜矿产量占全球~10%，选举结果将直接影响全球铜供给预期<br>• 左翼胜出→矿权审查+环保加严→铜矿扩张项目审批放缓→中长期铜供给收紧→铜价获得结构性支撑<br>• 右翼胜出→矿业投资环境稳定→铜矿扩产按计划推进→铜供给预期充裕<br>• 秘鲁自2018年以来已出现8位总统更迭，政局稳定性本身是风险变量<br><br><strong>对资金的影响：</strong><br>• 铜矿股（Southern Copper、Cerredo、Antamina）在选举前后波动加大<br>• 左翼胜出→秘鲁索尔贬值、秘鲁主权CDS利差扩大→国际资本可能撤离秘鲁矿业资产<br>• 中国铜企（紫金矿业Minera Ahijado、首钢秘铁）面临合同审查和税负上升风险<br>• COMEX铜和LME铜在选举结果出炉后将方向性波动——左翼利好铜价、右翼利空铜价<br>• 秘鲁大型在建项目（Quellaveco扩建、La Granja）审批进程是后续跟踪重点'},
+
+ // ===== JULY =====
+ j01:{flag:'https://flagcdn.com/w40/us.png',title:'NFP(6月)',date:'7月2日 周四 20:30',html:'<span class="expand-tag pending">待发布</span>6月非农就业数据。由于7月4日独立日假期，NFP提前至周四发布。<br><br>6月就业市场是否延续5月172K的强劲势头，将直接影响7/29-30 FOMC决策。'},
+ j02:{flag:'https://flagcdn.com/w40/us.png',title:'ISM制造业PMI',date:'7月3日 周四 22:00',html:'<span class="expand-tag pending">待发布</span>6月ISM制造业PMI。5月数据54.0%为四年新高，6月能否持续扩张是制造业周期确认的关键。'},
+ j03:{flag:'https://flagcdn.com/w40/us.png',title:'🇺🇸独立日休市',date:'7月4日 周五',html:'美国独立日联邦假日，美股、美债市场休市。'},
+ j04:{flag:'https://flagcdn.com/w40/au.png',title:'RBA Board Meeting',date:'7月7日 周一',html:'<span class="expand-tag pending">待决议</span>澳洲央行7月利率决议。当前利率3.85%，市场预期维持不变。关注是否释放8月降息信号。'},
+ j05:{flag:'https://flagcdn.com/w40/cn.png',title:'中国CPI/PPI',date:'7月10日 周四 09:30',html:'<span class="expand-tag pending">待发布</span>6月CPI和PPI。关注CPI是否继续低位运行、PPI是否止跌回升。世界杯消费效应对CPI的推升效果可能显现。'},
+ j06:{flag:'https://flagcdn.com/w40/us.png',title:'CPI(6月)',date:'7月10日 周四 20:30',html:'<span class="expand-tag pending">待发布</span>6月美国CPI。若CPI延续回落趋势→9月降息预期升温；若CPI意外上行→降息预期再次推迟。<br><br>世界杯对美国通胀的传导效果是未知数。'},
+ j07:{flag:'https://flagcdn.com/w40/us.png',title:'PPI',date:'7月14日 周一 20:30',html:'<span class="expand-tag pending">待发布</span>6月PPI。关税成本传导效应是否持续体现。PPI领先CPI约2-3个月，PPI走势预示下半年通胀方向。'},
+ j08:{flag:'https://flagcdn.com/w40/ca.png',title:'BoC Rate Decision',date:'7月15日 周二',html:'<span class="expand-tag pending">待决议</span>加央行7月利率决议，当前2.25%。6月维持不变后，7月是否启动降息是关键。若降息→加元走弱→全球降息信号。'},
+ j09:{flag:'https://flagcdn.com/w40/cn.png',title:'Q2 GDP',date:'7月15日 周二 10:00',html:'<span class="expand-tag pending">待发布</span>中国Q2 GDP数据，市场预期4.8-5.2%。若低于5%将触发降息降准预期；若超5.2%则经济企稳叙事强化。<br><br>同时发布6月工业增加值、消费、投资等数据。'},
+ j10:{flag:'https://flagcdn.com/w40/us.png',title:'零售销售',date:'7月16日 周三 20:30',html:'<span class="expand-tag pending">待发布</span>6月零售销售。世界杯期间餐饮分项可能出现短期提振。核心零售（剔除汽车和汽油）更反映趋势。'},
+ j11:{flag:'https://flagcdn.com/w40/us.png',title:'新屋开工',date:'7月17日 周四 20:30',html:'<span class="expand-tag pending">待发布</span>6月新屋开工。FOMC决议后地产市场是否回暖是降息传导效果的第一站。'},
+ j12:{flag:'https://flagcdn.com/w40/cn.png',title:'LPR报价',date:'7月20日 周日',html:'<span class="expand-tag pending">待发布</span>7月LPR报价。若Q2 GDP偏弱，央行可能通过压缩加点方式降LPR 5-10BP。'},
+ j13:{flag:'https://flagcdn.com/w40/eu.png',title:'ECB决议',date:'7月23日 周四 20:45',html:'<span class="expand-tag pending">待决议</span>7月ECB利率决议。6月加息25BP后，7月是否维持不变？拉加德新闻发布会措辞将影响欧元走势和全球债券市场。'},
+ j14:{flag:'https://flagcdn.com/w40/us.png',title:'成屋销售',date:'7月23日 周三 22:00',html:'<span class="expand-tag pending">待发布</span>6月成屋销售。降息预期是否传导至地产市场。'},
+ j15:{flag:'https://flagcdn.com/w40/us.png',title:'GDP速报',date:'7月25日 周五 20:30',html:'<span class="expand-tag pending">待发布</span>Q2 GDP Advance Estimate。市场预期年化1.8-2.2%。若低于1.5%→衰退担忧升温；若高于2.5%→软着陆叙事强化。'},
+ j16:{flag:'https://flagcdn.com/w40/us.png',title:'PCE',date:'7月28日 周一 20:30',html:'<span class="expand-tag pending">待发布</span>6月PCE通胀数据，美联储最关注的通胀指标。核心PCE若持续回落→确认9月降息路径。'},
+ j17:{flag:'https://flagcdn.com/w40/us.png',title:'消费者信心',date:'7月29日 周二 22:00',html:'<span class="expand-tag pending">待发布</span>7月世界大型企业联合会消费者信心指数。'},
+ j18:{flag:'https://flagcdn.com/w40/jp.png',title:'BOJ决议',date:'7月30日 周三',html:'<span class="expand-tag pending">待决议</span>7月日央行利率决议。6月加息25BP后，7月是否按兵不动？若意外再加息→日元急剧升值→全球套利交易平仓风险。'},
+ j19:{flag:'https://flagcdn.com/w40/gb.png',title:'BOE决议',date:'7月30日 周三 19:00',html:'<span class="expand-tag pending">待决议</span>7月英央行利率决议，当前3.75%，预期维持不变。关注MPC投票比例变化。'},
+ j20:{flag:'https://flagcdn.com/w40/us.png',title:'JOLTS',date:'7月31日 周四 22:00',html:'<span class="expand-tag pending">待发布</span>6月JOLTS职位空缺。7/29-30 FOMC会议前最后一次劳动力市场数据。'},
+ j21:{flag:'https://flagcdn.com/w40/cn.png',title:'社融/M2/信贷',date:'7月中旬 待定',html:'<span class="expand-tag pending">待发布</span>6月中国金融数据。社融增速、M2、新增贷款三大核心指标。'},
+ j22:{flag:'https://flagcdn.com/w40/cn.png',title:'国民经济数据',date:'7月中旬 待定',html:'<span class="expand-tag pending">待发布</span>6月工业增加值、消费、投资数据。'},
+ // ===== JULY NEW =====
+ j23:{flag:'https://flagcdn.com/w40/us.png',title:'建筑业支出',date:'7月2日 周四 22:00',html:'<span class="expand-tag pending">待发布</span>5月建筑业支出。数据中心和公共工程支出是主要驱动力，住宅建筑支出受抵押贷款利率压制。'},
+ j24:{flag:'https://flagcdn.com/w40/us.png',title:'ISM非制造业PMI',date:'7月3日 周四 22:00',html:'<span class="expand-tag pending">待发布</span>6月ISM服务业PMI。5月数据54.5%持续扩张，关注价格分项是否推升通胀压力。'},
+ j25:{flag:'https://flagcdn.com/w40/un.png',title:'⚽世界杯1/4决赛',date:'7月4-5日',html:'<span class="expand-tag pending">待举办</span>美加墨世界杯1/4决赛阶段。8场淘汰赛，主办城市酒店、餐饮消费高峰。'},
+ j26:{flag:'https://flagcdn.com/w40/un.png',title:'⚽世界杯半决赛',date:'7月7-8日',html:'<span class="expand-tag pending">待举办</span>美加墨世界杯半决赛。4场半决赛，全球收视峰值，广告和转播收入高峰。'},
+ j27:{flag:'https://flagcdn.com/w40/us.png',title:'FOMC会议纪要',date:'7月8日 周三 02:00',html:'<span class="expand-tag pending">待发布</span>6/17 FOMC会议纪要。关注点阵图分歧细节、降息时点讨论、通胀前景评估。若纪要偏鸽→9月降息预期升温。'},
+ j28:{flag:'https://flagcdn.com/w40/cn.png',title:'中国6月进出口数据',date:'7月10日 周四',html:'<span class="expand-tag pending">待发布</span>6月进出口数据。5月出口+19.4%超预期，6月是否延续AI产业链出口强劲势头。'},
+ j29:{flag:'https://flagcdn.com/w40/us.png',title:'密歇根消费者信心（初值）',date:'7月11日 周五 22:00',html:'<span class="expand-tag pending">待发布</span>7月密歇根消费者信心初值。关注1年期通胀预期分项，若高于3.5%将引发美联储警惕。'},
+ j30:{flag:'https://flagcdn.com/w40/us.png',title:'Lime IPO',date:'7月11日 周五',html:'<span class="expand-tag pending">待上市</span>电动滑板车/自行车共享公司Lime纳斯达克挂牌，代码LIME。5月8日已交表，Goldman Sachs和JPMorgan主承销。募资规模待定，估值约$20–30亿。<br><br><strong>资金影响：</strong><br>• 中小型IPO，募资规模约$3–5亿，对市场整体流动性影响有限<br>• 上市当日共享出行板块（Uber、Lyft等）可能受到情绪联动，小盘科技股申购资金短暂冻结<br>• 成功上市将验证2026年IPO市场的风险偏好是否延伸至非AI赛道中型企业<br><br><strong>宏观影响：</strong><br>• Lime盈利能力弱、单位经济亏损，其IPO成功与否是市场风险偏好的"边际温度计"<br>• 若估值受追捧→说明市场流动性充裕，risk-on模式延续；若破发→市场开始区分AI龙头与普通科技股'},
+ j31:{flag:'https://flagcdn.com/w40/us.png',title:'零售销售',date:'7月15日 周二 20:30',html:'<span class="expand-tag pending">待发布</span>6月零售销售。世界杯期间餐饮分项可能出现短期提振。核心零售（剔除汽车和汽油）更反映趋势。'},
+ j32:{flag:'https://flagcdn.com/w40/us.png',title:'工业生产',date:'7月17日 周四 21:15',html:'<span class="expand-tag pending">待发布</span>6月工业生产和产能利用率。产能利用率超过80%通常预示通胀压力。'},
+ j33:{flag:'https://flagcdn.com/w40/un.png',title:'⚽世界杯决赛',date:'7月19日 周日',html:'<span class="expand-tag pending">待举办</span><strong>2026美加墨世界杯决赛！</strong>首次48支球队参赛，横跨16座城市104场比赛，7/20闭幕。预计650万球迷涌入，推升CPI分项0.2-0.5个百分点。史上最大规模世界杯，全球收视预计超50亿人次。'},
+ j34:{flag:'https://flagcdn.com/w40/us.png',title:'密歇根消费者信心（终值）',date:'7月25日 周五 22:00',html:'<span class="expand-tag pending">待发布</span>7月密歇根消费者信心终值。关注5年期通胀预期分项。'},
+ j35:{flag:'https://flagcdn.com/w40/cn.png',title:'中国PMI',date:'7月31日 周四 09:30',html:'<span class="expand-tag pending">待发布</span>7月PMI数据。5月制造业PMI 49.5处于收缩区间，7月能否重回50是经济企稳信号。'},
+ j36:{flag:'https://flagcdn.com/w40/cn.png',title:'长鑫存储挂牌（预期）',date:'7月中旬 待定',html:'<span class="expand-tag pending">预期中</span>中国存储芯片第一股长鑫存储科创板挂牌，募资295亿元，为科创板历史第二大IPO。5/27已过会并提交注册。<br><br><strong>资金影响：</strong><br>• 申购冻结资金规模预计<strong>3,000–5,000亿元</strong>，申购期间A股流动性明显收紧，创业板/科创板中小盘股面临短期流动性压力<br>• 挂牌后快速纳入科创50及沪深300，被动资金持续流入；机构"打底仓"需求推升股价<br>• 与前期SpaceX IPO资金影响叠加，7月A股市场资金面面临较大压力<br><br><strong>宏观影响：</strong><br>• 国产DRAM首股上市，重塑存储芯片国产替代预期定价体系，带动北方华创、拓荆科技等设备及材料股<br>• 向国际市场发出明确信号：中国高端半导体通过资本市场加速发展<br>• 若上市后股价大幅溢价→增强全球半导体供应链多元化预期，对三星/SK海力士估值有长期压制'},
+ j37:{flag:'https://flagcdn.com/w40/us.png',title:'Anthropic路演（预期）',date:'7月 待定',html:'<span class="expand-tag pending">预期中</span>AI安全公司Anthropic 6/1已秘密交表S-1，估值<strong>$9,650亿</strong>（H轮$650亿融资后）。7月可能启动IPO路演，Q3-Q4正式上市。CFO为Airbnb IPO老将Krishna Rao。<br><br><strong>资金影响：</strong><br>• Anthropic估值接近万亿美元，若成功上市将是继SpaceX之后2026年第二大IPO<br>• 路演阶段开始冻结机构认购资金，预计募资$50–100亿，申购冻结规模庞大<br>• 对纳斯达克大盘股（特别是AI相关持仓如NVDA、MSFT、GOOG）形成调仓卖压——机构需腾挪仓位<br>• Amazon（持Anthropic约20%股份）和Google（持约10%）或因解锁期安排，届时面临大股东减持预期<br><br><strong>宏观影响：</strong><br>• Anthropic是ChatGPT最直接的竞争对手，其上市路演将使AI赛道的商业化进展和烧钱速度完全透明化<br>• S-1披露的财务数据（收入、亏损）将成为AI公司估值的重要参照系，可能触发整个AI板块的重新定价<br>• 若路演估值超$1T→AI泡沫担忧升温，监管关注度提升；若估值下修→市场对AI商业化节奏更趋保守'},
+ j53:{flag:'https://flagcdn.com/w40/id.png',title:'印尼RKAB镍矿配额修订受理（预期）',date:'7月 待定',html:'<span class="expand-tag pending">预期中</span><strong>全球镍市场最关键的政策事件。</strong>印尼镍矿商协会3月表示，预计政府7月受理RKAB配额修订申请，配额有望额外增加<strong>30%</strong>（约8,000万吨）。<br><br><strong>背景：</strong><br>• 2026年印尼镍矿RKAB配额已从2.6-2.7亿吨降至2.09亿吨，但冶炼厂年需求约3.8-4亿吨，缺口严重<br>• 4月印尼将1.6%品位镍矿计价修正系数从17%拉高至30%，基准价暴涨221%<br>• 新喀里多尼亚Eramet因配额削减70%已停止镍矿运营<br><br><strong>对宏观的影响：</strong><br>• 若+30%配额兑现→全球镍矿供应紧张大幅缓解，镍价承压→不锈钢/新能源电池成本下降<br>• 若配额增幅不及预期或再度推迟→镍价维持高位，全球不锈钢和三元电池成本持续承压<br>• 印尼政策是2026年镍价方向的最大单一变量，影响全球新能源金属供应链<br><br><strong>对资金的影响：</strong><br>• 沪镍/LME镍在配额修订前后将剧烈波动，方向取决于配额增幅<br>• +30%配额→镍价可能跌至$15,000以下，镍空头获利<br>• 配额不及预期→镍价冲$22,000+，新能源金属ETF资金流入<br>• 镍价对不锈钢（300系）成本传导最直接，关注太钢不锈/青山控股定价调整'},
+ j54:{flag:'https://flagcdn.com/w40/id.png',title:'印尼镍/煤炭出口关税修订方案（预期）',date:'7月 待定',html:'<span class="expand-tag pending">预期中</span><strong>印尼从"基准价调控"转向"直接征税"的关键一步。</strong><br><br>3月财长普尔巴亚确认总统已批准对镍和煤炭征收出口关税及暴利税，原定4/1实施。4/15生效的矿产基准价修订令（1.6%镍矿修正系数从17%拉至30%）仅实施20余天即叫停。7月预计推出修订版方案。<br><br><strong>政策演进：</strong><br>• 4月基准价新政（间接加税）→遭业界强烈反对→紧急叫停<br>• 7月修订版可能转为<strong>直接出口关税</strong>模式，税率阶梯化<br>• 镍中间品免关税出口时代可能终结<br>• 煤炭出口关税与暴利税同步推进，用于抵消国家预算中补贴成本<br><br><strong>对宏观的影响：</strong><br>• 印尼是全球最大镍生产国（占~50%），出口关税将系统性地抬升全球镍成本中枢<br>• 镍中间品征税→中国不锈钢和三元电池原料成本结构性上行，对新能源产业链利润率形成挤压<br>• 煤炭出口关税→全球动力煤供给收紧→电价上行→制造业成本增加<br>• 印尼政策组合拳（RKAB削减+基准价+出口关税）是2026年资源民族主义的典型样本<br><br><strong>对资金的影响：</strong><br>• 沪镍/LME镍在政策出台前后将剧烈波动，方向取决于税率设计和实施节奏<br>• 印尼镍冶炼企业（青山、德龙、华友钴业印尼工厂）利润率直接受影响<br>• 不锈钢企业（太钢不锈、青山控股）成本端承压，但国内自有镍矿企业相对受益<br>• 煤炭出口关税→全球动力煤价上行，中国煤企（中国神华、中煤能源）可能间接受益于进口煤价抬升'},
+ j55:{flag:'https://flagcdn.com/w40/cl.png',title:'智利锂矿国有化推进——Codelco-SQM合资运营',date:'7月 待定',html:'<span class="expand-tag pending">预期中</span><strong>全球锂供给格局的根本性重塑。</strong><br><br>2026年1月27日，Codelco与SQM合资公司正式完成设立，智利国家铜业公司接管阿塔卡马盐湖锂资源控制权。天齐锂业上诉被驳回，SQM核心锂业务控制权发生根本变更。<br><br><strong>国有化核心进展：</strong><br>• Codelco子公司Minera Tarar与SQM子公司SQM Salar成立合资公司<br>• 天齐锂业（持SQM 22.16%股权）对合伙协议的反对被法院驳回<br>• 合资公司从现有运营向全面接管过渡，7月预计进入实质性运营阶段<br>• 智利"国家锂战略"从政策宣言进入落地执行<br><br><strong>对宏观的影响：</strong><br>• 智利是全球第二大锂生产国，国有化意味着全球锂供给从"市场驱动"向"国家战略驱动"转变<br>• Codelco运营可能优先考虑长期供应安全而非短期利润最大化→锂价下行空间受限<br>• 智利模式可能被阿根廷、玻利维亚等锂三角国家效仿→全球锂资源国有化趋势加速<br>• 对中国锂企海外布局（天齐锂业、赣锋锂业）的战略信号：资源国政策风险显著上升<br><br><strong>对资金的影响：</strong><br>• 天齐锂业SQM股权价值大幅缩水，港股/A股锂板块面临海外资产减值预期<br>• 碳酸锂期货在国有化落地期间波动加大，锂价底部支撑增强<br>• 智利矿业投资风险溢价上升→国际矿业资本可能转向澳洲/加拿大锂矿项目<br>• 关注Codelco后续运营策略：若减少产量配额→锂价上行；若维持现有产量→市场影响有限'},
+ j56:{flag:'https://flagcdn.com/w40/cd.png',title:'刚果（金）钴出口配额制执行情况',date:'7月 待定',html:'<span class="expand-tag pending">持续跟踪</span><strong>全球钴供给最关键的政策变量。</strong><br><br>2025年10月16日，刚果（金）结束长达7个月的钴出口禁令，正式实施年度出口配额制。ARECOMS（战略矿产市场监管局）设定2026-2027年年度出口配额<strong>9.66万吨</strong>，约为2024年出口量的一半。<br><br><strong>配额制核心条款：</strong><br>• 2025年Q4配额18,125吨（10月3,625吨、11月5,000吨、12月9,500吨）<br>• 2026年全年配额9.66万吨，获批复的21家企业按配额出口<br>• 手工采矿产出的钴同样纳入配额管理<br>• 配额分配向合规企业倾斜，小规模/非正规矿企出口受限<br><br><strong>对宏观的影响：</strong><br>• 刚果钴产量占全球~70%，配额9.66万吨仅为2024年出口量的一半→全球钴供给系统性收紧<br>• 钴价已从禁令期间低点回升，配额制下钴价中枢将永久上移<br>• 电动车三元电池成本承压→可能加速磷酸铁锂（LFP）路线替代<br>• 刚果政策是"资源国议价权上升"趋势最极端的案例，可能催生全球钴的OPEC式卡特尔<br><br><strong>对资金的影响：</strong><br>• 钴价上行→持有刚果钴矿的中资企业（洛阳钼业/华友钴业/寒锐钴业）受益于价格弹性<br>• 但配额制限制出口量→"价涨量缩"，实际利润增幅取决于配额分配<br>• 三元正极材料企业（容百科技、当升科技）成本端持续承压，LFP替代逻辑强化<br>• 刚果矿业政策风险溢价→国际矿业资本对刚果新投资持观望态度，长期供给增速受限<br>• 关注每季度ARECOMS配额执行报告——若实际出口远低于配额→钴价进一步上行'},
+ /* ===== AUGUST ===== */
+ a01:{flag:'https://flagcdn.com/w40/au.png',title:'RBA会议',date:'8月4日 周一',html:'<span class="expand-tag pending">待决议</span>8月澳洲央行利率决议。'},
+ a02:{flag:'https://flagcdn.com/w40/in.png',title:'RBI MPC',date:'8月5-6日',html:'<span class="expand-tag pending">待决议</span>印度央行8月货币政策委员会会议。'},
+ a03:{flag:'https://flagcdn.com/w40/gb.png',title:'BOE决议',date:'8月6日 周四 19:00',html:'<span class="expand-tag pending">待决议</span>8月英央行利率决议。7月维持不变后，8月是否启动降息？英国通胀走势是关键。'},
+ a04:{flag:'https://flagcdn.com/w40/us.png',title:'NFP(7月)',date:'8月7日 周五 20:30',html:'<span class="expand-tag pending">待发布</span>7月非农就业数据。如果6月NFP强劲而7月大幅回落→劳动力市场降温信号→9月降息预期升温。'},
+ a05:{flag:'https://flagcdn.com/w40/cn.png',title:'中国CPI/PPI',date:'8月10日 周一 09:30',html:'<span class="expand-tag pending">待发布</span>7月CPI和PPI。世界杯消费效应消退后CPI是否回归低位。'},
+ a06:{flag:'https://flagcdn.com/w40/us.png',title:'CPI(7月)',date:'8月12日 周二 20:30',html:'<span class="expand-tag pending">待发布</span>7月美国CPI。8月无FOMC，但CPI数据将直接决定9月FOMC降息预期。若CPI持续回落→9月降息几乎板上钉钉。'},
+ a07:{flag:'https://flagcdn.com/w40/us.png',title:'PPI',date:'8月14日 周四 20:30',html:'<span class="expand-tag pending">待发布</span>7月PPI。关注关税成本传导效应是否在PPI中体现。'},
+ a08:{flag:'https://flagcdn.com/w40/us.png',title:'新屋开工',date:'8月19日 周二 20:30',html:'<span class="expand-tag pending">待发布</span>7月新屋开工。'},
+ a09:{flag:'https://flagcdn.com/w40/cn.png',title:'LPR报价',date:'8月20日 周三',html:'<span class="expand-tag pending">待发布</span>8月LPR报价。Q2 GDP数据后央行是否调整利率。'},
+ a10:{flag:'https://flagcdn.com/w40/us.png',title:'成屋销售',date:'8月21日 周四 22:00',html:'<span class="expand-tag pending">待发布</span>7月成屋销售。'},
+ a11:{flag:'https://flagcdn.com/w40/us.png',title:'耐用品订单',date:'8月26日 周二 20:30',html:'<span class="expand-tag pending">待发布</span>7月耐用品订单初值。企业投资领先指标。'},
+ a12:{flag:'https://flagcdn.com/w40/us.png',title:'GDP修正值',date:'8月27日 周三 20:30',html:'<span class="expand-tag pending">待发布</span>Q2 GDP Second Estimate。速报后的修正可能改变经济放缓叙事。'},
+ a13:{flag:'https://flagcdn.com/w40/us.png',title:'PCE',date:'8月28日 周四 20:30',html:'<span class="expand-tag pending">待发布</span>7月PCE通胀数据。美联储最关注的通胀指标。若核心PCE持续回落→9月降息路径确认。'},
+ a14:{flag:'https://flagcdn.com/w40/us.png',title:'消费者信心',date:'8月29日 周五 22:00',html:'<span class="expand-tag pending">待发布</span>8月世界大型企业联合会消费者信心指数。'},
+ a15:{flag:'https://flagcdn.com/w40/cn.png',title:'中国PMI',date:'8月31日 周一 09:30',html:'<span class="expand-tag pending">待发布</span>8月PMI。7月PMI数据若重回50以上则经济企稳叙事强化。'},
+ a16:{flag:'https://flagcdn.com/w40/cn.png',title:'社融/M2/信贷',date:'8月中旬 待定',html:'<span class="expand-tag pending">待发布</span>7月中国金融数据。社融增速、M2、新增贷款三大核心指标。'},
+ /* ===== AUGUST NEW ===== */
+ a17:{flag:'https://flagcdn.com/w40/us.png',title:'ISM制造业PMI',date:'8月3日 周一 22:00',html:'<span class="expand-tag pending">待发布</span>7月ISM制造业PMI。6月数据54.0%为四年新高，7月能否持续扩张是制造业周期确认的关键。'},
+ a18:{flag:'https://flagcdn.com/w40/us.png',title:'ISM非制造业PMI',date:'8月5日 周三 22:00',html:'<span class="expand-tag pending">待发布</span>7月ISM服务业PMI。占GDP 80%的服务业韧性是经济软着陆的关键支撑。'},
+ a19:{flag:'https://flagcdn.com/w40/us.png',title:'FOMC会议纪要',date:'8月12日 周二 02:00',html:'<span class="expand-tag pending">待发布</span>7/29-30 FOMC会议纪要。是否释放9月降息信号、通胀前景评估、点阵图分歧细节。这是Jackson Hole前最重要的政策沟通文件。'},
+ a20:{flag:'https://flagcdn.com/w40/cn.png',title:'国民经济数据',date:'8月14日 周四 10:00',html:'<span class="expand-tag pending">待发布</span>7月工业增加值、社会消费品零售总额、固定资产投资数据。Q2 GDP后的首月经济数据，确认经济走势方向。'},
+ a21:{flag:'https://flagcdn.com/w40/us.png',title:'密歇根消费者信心（初值）',date:'8月15日 周五 22:00',html:'<span class="expand-tag pending">待发布</span>8月密歇根消费者信心初值。关注1年期通胀预期分项。'},
+ a22:{flag:'https://flagcdn.com/w40/us.png',title:'Jackson Hole全球央行年会开幕',date:'8月21日 周四',html:'<span class="expand-tag pending">待举办</span><strong>全年最重要央行沟通事件。</strong>杰克逊霍尔全球央行年会，美联储、ECB、BOJ等主要央行行长齐聚。鲍威尔演讲通常释放政策转向信号。2024年鲍威尔在此确认9月降息，2026年可能确认9月是否降息。'},
+ a23:{flag:'https://flagcdn.com/w40/us.png',title:'鲍威尔Jackson Hole演讲',date:'8月22日 周五 22:00',html:'<span class="expand-tag pending">待演讲</span><strong>美联储主席鲍威尔在Jackson Hole年会上的主旨演讲。</strong>这是全年最受关注的央行政策信号释放窗口。若暗示9月降息→美股美债大涨；若维持鹰派→市场回调。同时关注ECB行长拉加德和BOJ行长植田和男的发言。'},
+ a24:{flag:'https://flagcdn.com/w40/us.png',title:'密歇根消费者信心（终值）',date:'8月29日 周五 22:00',html:'<span class="expand-tag pending">待发布</span>8月密歇根消费者信心终值。关注5年期通胀预期分项。'},
+ a25:{flag:'https://flagcdn.com/w40/us.png',title:'OpenAI提交S-1（预期）',date:'8月 待定',html:'<span class="expand-tag pending">预期中</span>OpenAI预期9月IPO，8月可能提交S-1公开文件。估值$8,520亿（4月融资后），若上市将推至万亿美元。CEO Sam Altman称"零期待"上市，但公司需要巨额资本支持<strong>$1.4万亿基础设施路线图</strong>。CFO Sarah Friar曾主导Square和NextDoor上市。<br><br><strong>资金影响：</strong><br>• OpenAI若成功上市将是2026年规模最大IPO，预计募资<strong>$150–250亿</strong>，估值$1–1.5万亿<br>• S-1提交后立即触发机构"IPO仓位预留"行动：基金将减持流动性好的科技龙头（NVDA、MSFT、META）为OpenAI腾仓<br>• 认购冻结资金规模超$2,000亿，对美股整体流动性产生巨大虹吸效应，定价前1–2周市场流动性极度收紧<br>• Microsoft（持股约49%）在IPO后面临估值重新厘定——OpenAI独立上市后微软的AI资产价值是否被充分反映<br><br><strong>宏观影响：</strong><br>• S-1首次完整披露OpenAI的营收规模（预估$70–90亿年化）和亏损（可能超$50亿/年），将彻底重塑AI行业估值体系<br>• 若OpenAI亏损远超预期→AI烧钱叙事动摇，整个AI板块面临估值压缩<br>• 若盈利前景清晰→AI商业化落地得到验证，激发新一轮AI基础设施资本开支<br>• 美联储的利率环境是关键：若9月仍未降息，高估值AI公司的资本成本压力将直接反映在IPO定价折扣上'},
+ a26:{flag:'https://flagcdn.com/w40/fi.png',title:'Oura Ring IPO (Q3)',date:'8-9月 待定',html:'<span class="expand-tag pending">预期中</span>芬兰智能戒指公司OURA 5/21已秘密交表，Q3上市。主打睡眠/健康监测，估值约$50–80亿。<br><br><strong>资金影响：</strong><br>• 中型IPO，募资规模预计$5–10亿，市场影响局限于消费科技/健康科技板块<br>• Apple Watch、Fitbit等竞争对手股价可能因Oura上市路演数据（用户增速、ARPU）受到估值对比压力<br><br><strong>宏观影响：</strong><br>• 欧洲科技公司选择赴美上市，反映美股资本市场对欧洲科技公司的吸引力仍远超欧交所<br>• 可穿戴健康设备是消费者支出的自主选项，Oura用户留存率和消费意愿是消费韧性的参考指标'},
+ a27:{flag:'https://flagcdn.com/w40/au.png',title:'澳洲关键矿产生产税收抵免（CMPTI）首批申请',date:'8月 待定',html:'<span class="expand-tag pending">预期中</span><strong>全球关键矿产加工格局的重要政策变量。</strong><br><br>澳大利亚Critical Minerals Production Tax Incentive（CMPTI）于2026年7月1日正式生效，8月预计开放首批申请。该政策为在澳洲本土进行关键矿产加工的企业提供<strong>10%可退还税收抵免</strong>，持续至2039-40财年。<br><br><strong>政策核心：</strong><br>• 抵免比例：符合条件加工成本的10%<br>• 覆盖矿物：锂、钴、镍、锰、钒、稀土等31种关键矿产<br>• 适用期间：2026年7月1日至2039-40财年<br>• "可退还"意味着即使企业无应纳税额也可获得现金返还<br><br><strong>对宏观的影响：</strong><br>• 澳洲从"矿业出口国"向"矿产加工国"转型的核心政策工具，将吸引全球关键矿产加工产能向澳洲转移<br>• 10%税收抵免实质降低加工成本→提升澳洲加工产品在全球市场的价格竞争力<br>• 与印尼镍出口关税形成对冲：印尼加税推高镍价→澳洲加补贴吸引加工产能→全球镍加工格局重塑<br>• 中澳关键矿产合作可能因此深化，中国企业在澳加工投资意愿增强<br><br><strong>对资金的影响：</strong><br>• 澳洲关键矿产加工企业（Lynas、Iluka、Pilbara Minerals）直接受益，股价可能获得提振<br>• 全球锂/镍/钴加工产能投资可能向澳洲转移，中国加工企业面临竞争压力<br>• 澳元在政策生效后可能获得支撑——关键矿产加工投资流入→资本账户改善<br>• 关注首批申请企业名单：若大型中资企业申请→中澳经贸关系改善信号'}
+};
+
+// ========== RENDER FUNCTIONS ==========
+function getDaysInMonth(year, month) { return new Date(year, month, 0).getDate(); }
+function getFirstDayOfWeek(year, month) { let d = new Date(year, month-1, 1).getDay(); return d === 0 ? 6 : d - 1; } // 0=Mon
+
+function renderCalendar(year, month) {
+ const key = year + '-' + month;
+ const data = allEventData[key];
+ if (!data) return;
+ const grid = document.getElementById('calendarGrid');
+ grid.innerHTML = '';
+ const daysInMonth = getDaysInMonth(year, month);
+ const firstDay = getFirstDayOfWeek(year, month);
+ const today = new Date();
+ const isCurrentMonth = (today.getFullYear() === year && today.getMonth() + 1 === month);
+ const todayDate = today.getDate();
+
+ // Weekday headers
+ const wkds = ['周一','周二','周三','周四','周五','周六','周日'];
+ wkds.forEach(w => { const d = document.createElement('div'); d.className = 'weekday-header'; d.textContent = w; grid.appendChild(d); });
+
+ // Empty cells before 1st
+ for (let i = 0; i < firstDay; i++) { const d = document.createElement('div'); d.className = 'day-cell empty'; grid.appendChild(d); }
+
+ // Week banners already placed?
+ const bannersPlaced = new Set();
+
+ // Day cells
+ for (let day = 1; day <= daysInMonth; day++) {
+  // Check for week banner before this day
+  if (data.weekBanners) {
+   data.weekBanners.forEach(b => {
+    if (b.beforeDay === day && !bannersPlaced.has(b.label)) {
+     bannersPlaced.add(b.label);
+     const banner = document.createElement('div');
+     banner.className = 'grid-week-banner ' + b.cls;
+     banner.innerHTML = '<span class="banner-icon">' + b.icon + '</span><span class="banner-label">' + b.label + '</span><span class="banner-sep"></span><span class="banner-detail">' + b.detail + '</span>';
+     grid.appendChild(banner);
+    }
+   });
+  }
+  const cell = document.createElement('div');
+  const dayOfWeek = (firstDay + day - 1) % 7;
+  const isWeekend = dayOfWeek >= 5;
+  let cls = 'day-cell';
+  if (isCurrentMonth && day === todayDate) cls += ' today';
+  if (isWeekend) cls += ' weekend';
+  cell.className = cls;
+  cell.setAttribute('data-day', day);
+  const numDiv = document.createElement('div');
+  numDiv.className = 'day-number' + (isWeekend ? ' weekend-num' : '');
+  numDiv.textContent = day;
+  cell.appendChild(numDiv);
+  // Events
+  const evts = data.events[day] || [];
+  evts.forEach(ev => {
+   const pill = document.createElement('div');
+   pill.className = 'event-pill ' + ev.cls;
+   pill.setAttribute('data-id', ev.id);
+   pill.onclick = function() { showDetail(this); };
+   let html = ev.flag ? '<img class="pill-flag" src="https://flagcdn.com/w20/' + ev.flag + '.png" alt="" onerror="this.style.display=\'none\'"> ' : ''; html += ev.name;
+   if (ev.stars) html += ' <span class="pill-stars">' + ev.stars + '</span>';
+   pill.innerHTML = html;
+   cell.appendChild(pill);
+  });
+  grid.appendChild(cell);
+ }
+
+ // Trailing empty cells
+ const totalCells = firstDay + daysInMonth;
+ const remainder = totalCells % 7;
+ if (remainder > 0) { for (let i = 0; i < 7 - remainder; i++) { const d = document.createElement('div'); d.className = 'day-cell empty'; grid.appendChild(d); } }
+
+ // Mid-month section
+ const midEl = document.getElementById('midMonthSection');
+ if (data.midMonth && data.midMonth.pills.length > 0) {
+  let html = '<div class="mid-month-box"><div class="mid-month-title">' + data.midMonth.title + '</div><div class="mid-month-pills">';
+  data.midMonth.pills.forEach(p => {
+   html += '<div class="event-pill ' + p.cls + '" data-id="' + p.id + '" onclick="showDetail(this)">' + (p.flag ? '<img class="pill-flag" src="https://flagcdn.com/w20/' + p.flag + '.png" alt="" onerror="this.style.display=\'none\'"> ' : '') + p.name;
+   if (p.stars) html += ' <span class="pill-stars">' + p.stars + '</span>';
+   html += '</div>';
+  });
+  html += '</div></div>';
+  midEl.innerHTML = html;
+ } else { midEl.innerHTML = ''; }
+
+ // Focus box
+ const focusEl = document.getElementById('focusBox');
+ if (data.focus && data.focus.length > 0) {
+  let html = '<div class="focus-title">📋 本月核心关注</div><div class="focus-grid">';
+  data.focus.forEach(f => {
+   html += '<div class="focus-item" style="background:' + f.bg + ';border-left-color:' + f.bc + ';"><div class="focus-item-title" style="color:' + f.tc + ';">' + f.title + '</div><div class="focus-item-body">' + f.body + '</div></div>';
+  });
+  html += '</div>';
+  focusEl.innerHTML = html;
+ } else { focusEl.innerHTML = ''; }
+}
+
+function updateNav() {
+ const nav = document.getElementById('monthNav');
+ nav.innerHTML = '';
+ const monthNames = ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'];
+ visibleMonths.forEach((vm, idx) => {
+  const tab = document.createElement('div');
+  tab.className = 'month-tab' + (idx === currentIdx ? ' active' : '');
+  tab.textContent = monthNames[vm.month - 1];
+  if (idx !== currentIdx) {
+   tab.onclick = function() { switchToMonth(idx); };
+  }
+  nav.appendChild(tab);
+ });
+}
+
+function switchToMonth(idx) {
+ if (idx < 0 || idx >= visibleMonths.length || idx === currentIdx) return;
+ const grid = document.getElementById('calendarGrid');
+ grid.classList.add('switching');
+ document.getElementById('detailPanel').classList.remove('open');
+ setTimeout(() => {
+  currentIdx = idx;
+  const vm = visibleMonths[currentIdx];
+  renderCalendar(vm.year, vm.month);
+  updateNav();
+  grid.classList.remove('switching');
+ }, 220);
+}
+
+function showDetail(el) {
+ const id = el.getAttribute('data-id');
+ const data = eventData[id];
+ if (!data) return;
+ const panel = document.getElementById('detailPanel');
+ const panelFlag = document.getElementById('panelFlag');
+ const panelTitle = document.getElementById('panelTitle');
+ const panelDate = document.getElementById('panelDate');
+ const panelBody = document.getElementById('panelBody');
+ if (panel.classList.contains('open') && panelTitle.textContent === data.title) {
+  panel.classList.remove('open');
+  return;
+ }
+ if(data.flag && data.flag.startsWith('http')) { panelFlag.src = data.flag; panelFlag.style.display = 'block'; } else { panelFlag.style.display = 'none'; }
+ panelTitle.textContent = data.title;
+ panelDate.textContent = data.date;
+ panelBody.innerHTML = data.html;
+ if (!panel.classList.contains('open')) panel.classList.add('open');
+ setTimeout(() => { panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }, 100);
+}
+
+document.addEventListener('click', function(e) {
+ if (!e.target.closest('.event-pill') && !e.target.closest('.expand-panel')) {
+  document.getElementById('detailPanel').classList.remove('open');
+ }
+});
+
+// ========== INIT ==========
+const initMonth = visibleMonths[currentIdx];
+renderCalendar(initMonth.year, initMonth.month);
+updateNav();
+</script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+﻿# WorkBuddy AI working memory (contains private info)
+.workbuddy/
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
