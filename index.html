@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!-- last updated: 2026-06-15 03:12 -->
+<!-- last updated: 2026-06-15 13:51 -->
 <title>全球宏观事件日程表</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&family=Noto+Sans+SC:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -280,12 +280,12 @@ const allEventData = {
    11: [{id:'e17',flag:'un',name:'⚽世界杯开幕',cls:'pill-event high',stars:'★★'},{id:'e18',flag:'us',name:'美国PPI',cls:'pill-data',stars:'★★'},{id:'e19',flag:'eu',name:'ECB决议',cls:'pill-ecb high',stars:'★★★'},{id:'e20',flag:'us',name:'SpaceX定价',cls:'pill-ipo high',stars:'★★★'}],
    12: [{id:'e21',flag:'us',name:'SpaceX挂牌SPCX',cls:'pill-ipo high',stars:'★★★'},{id:'e22',flag:'us',name:'密歇根初值',cls:'pill-data',stars:''},{id:'e23',flag:'cn',name:'华为HDC',cls:'pill-event high',stars:'★★★'},{id:'e51',flag:'cn',name:'惠科股份申购',cls:'pill-ipo',stars:'★★'},{id:'e26',flag:'cn',name:'长鑫科技注册生效',cls:'pill-ipo high',stars:'★★★'},{id:'e35',flag:'cn',name:'社融/M2/信贷',cls:'pill-cn',stars:''}],
    13: [],
-   14: [],
-   15: [{id:'e24',flag:'us',name:'工业生产',cls:'pill-data',stars:''},{id:'e52',flag:'cn',name:'粤芯半导体上会',cls:'pill-ipo',stars:'★★'},{id:'e53',flag:'cn',name:'矿产资源法实施条例',cls:'pill-cn high',stars:'★★★'}],
+   14: [{id:'e58',flag:'ir',name:'🕊️美伊停战协议',cls:'pill-trade high',stars:'★★★'}],
+   15: [{id:'e24',flag:'us',name:'工业生产',cls:'pill-data',stars:''},{id:'e52',flag:'cn',name:'粤芯半导体上会',cls:'pill-ipo',stars:'★★'},{id:'e53',flag:'cn',name:'矿产资源法实施条例',cls:'pill-cn high',stars:'★★★'},{id:'e57',flag:'fr',name:'G7峰会(埃维昂)',cls:'pill-event high',stars:'★★★'}],
    16: [{id:'e25',flag:'jp',name:'日央行决议',cls:'pill-boj high',stars:'★★★'},{id:'e28',flag:'cn',name:'国民经济数据',cls:'pill-cn high',stars:'★★'},{id:'e29',flag:'us',name:'新屋开工',cls:'pill-data',stars:''}],
-   17: [{id:'e30',flag:'us',name:'FOMC决议',cls:'pill-fed high',stars:'★★★'},{id:'e31',flag:'us',name:'零售销售',cls:'pill-data',stars:'★★'}],
+   17: [{id:'e30',flag:'us',name:'FOMC决议',cls:'pill-fed high',stars:'★★★'},{id:'e31',flag:'us',name:'零售销售',cls:'pill-data',stars:'★★'},{id:'e56',flag:'cn',name:'陆家嘴论坛',cls:'pill-cn high',stars:'★★★'}],
    18: [{id:'e32',flag:'gb',name:'英央行决议',cls:'pill-boe',stars:'★★'}],
-   19: [{id:'e33',flag:'us',name:'Juneteenth休市',cls:'pill-event',stars:''}],
+   19: [{id:'e33',flag:'us',name:'Juneteenth休市',cls:'pill-event',stars:''},{id:'e59',flag:'ch',name:'美伊正式签字(瑞士)',cls:'pill-trade high',stars:'★★★'}],
    20: [{id:'e34',flag:'cn',name:'LPR报价',cls:'pill-cn',stars:'★★'}],
    21: [],
    22: [],
@@ -300,13 +300,15 @@ const allEventData = {
   },
   weekBanners: [
    { beforeDay: 8, cls: 'tech-week', icon: '🖥️', label: '科技超级周', detail: '6/8–6/14 · WWDC+HDC+智谱入恒科+SpaceX+OpenAI递表' },
-   { beforeDay: 15, cls: 'central-bank-week', icon: '🏦', label: '央行超级周', detail: '6/15–6/21 · BOJ+FOMC+BOE 三大央行决议' }
+   { beforeDay: 15, cls: 'central-bank-week', icon: '🏦', label: '央行超级周+地缘剧变', detail: '6/15–6/21 · G7峰会+美伊协议+BOJ+FOMC+BOE+陆家嘴论坛' }
   ],
   midMonth: { title: '📅 6月待定日期事件', pills: [
    {id:'e27',flag:'cn',name:'长江存储IPO申请(预期)',cls:'pill-ipo',stars:'★★'},
    {id:'e46',flag:'gn',name:'几内亚铝土矿出口管制(待出台)',cls:'pill-trade high',stars:'★★★'}
   ]},
   focus: [
+   {bg:'rgba(46,109,164,0.06)',bc:'#2e6da4',tc:'#2e6da4',title:'🕊️ 美伊停战',body:'6/14美伊协议达成！霍尔木兹海峡开放，伊朗石油可自由出口，布伦特原油中枢下移$8-15。6/19瑞士正式签字。60天浓缩铀谈判是后续核心风险'},
+   {bg:'var(--blue-bg)',bc:'var(--blue)',tc:'var(--blue)',title:'🇫🇷 G7埃维昂',body:'6/15-17法国G7峰会，法国邀请新兴经济体参会，AI治理/贸易关税/中东/乌克兰四大议题'},
    {bg:'var(--red-bg)',bc:'var(--red)',tc:'var(--red)',title:'通胀博弈',body:'CPI（6/10）预期4.1%或为年内峰值，PPI预期6.5%跳升。世界杯开幕推升食品饮料消费，短期CPI承压'},
    {bg:'var(--blue-bg)',bc:'var(--blue)',tc:'var(--blue)',title:'ECB转折',body:'欧央行6/11或加息25BP至2.25%，结束八轮降息周期，为2023年9月以来首次加息'},
    {bg:'var(--purple-bg)',bc:'var(--purple)',tc:'var(--purple)',title:'BOJ加息',body:'日央行6/16可能加息25BP至1%，隔夜掉期定价加息概率88%，年内仍有加息空间'},
@@ -483,6 +485,7 @@ const eventData = {
  e52:{flag:'https://flagcdn.com/w40/cn.png',title:'粤芯半导体创业板IPO上会',date:'6月15日 周一',html:'<span class="expand-tag pending">待上会</span><strong>"广州第一芯"冲刺创业板。</strong>粤芯半导体6月15日接受深交所上市委审议，拟募资75亿元。保荐机构为广发证券。<br><br><strong>关键信息：</strong><br>• 广东省自主培养的国家级集成电路制造企业，12英寸晶圆代工<br>• 2025年营收25.82亿元，仍处于亏损状态<br>• 创业板第三套上市标准启用以来首家上会的未盈利晶圆制造企业<br>• 若成功上市→将成为创业板首家晶圆制造企业<br><br><strong>对宏观的影响：</strong><br>• 粤芯半导体上会标志着创业板对"成长型创新创业企业"的包容度进一步提升——不再仅比拼盈利能力<br>• 中国半导体产业链从设计向制造延伸的资本化路径逐步打通<br>• 若成功过会→对国内晶圆代工产业链（设备、材料、封测）形成正面信号<br><br><strong>对资金的影响：</strong><br>• 上会本身不直接冻结资金，但过会将引发半导体板块情绪性拉升<br>• 若成功上市，募资75亿元→对创业板资金面有一定压力，但规模可控<br>• 粤芯半导体若成功上市→晶圆代工板块（中芯国际、华虹半导体）估值对比效应<br>• 关注上会结果：若通过→半导体设备/材料股可能短期联动上涨'},
  e53:{flag:'https://flagcdn.com/w40/cn.png',title:'《矿产资源法实施条例》施行',date:'6月15日 周一',html:'<span class="expand-tag pending">待施行</span><strong>中国矿产资源管理的里程碑式法规升级。</strong>国务院总理李强5月15日签署第839号国务院令，《中华人民共和国矿产资源法实施条例》自6月15日起施行。<br><br><strong>核心内容：</strong><br>• 细化矿产资源开发利用水平评估制度<br>• 完善矿业权管理制度，强化国家资源安全战略<br>• 建立战略性矿产资源储备和应急体系<br>• 加强矿山生态环境保护和修复<br>• 规范矿产资源监督管理<br><br><strong>对宏观的影响：</strong><br>• 《条例》是中国矿产资源法治化的重要里程碑，与全球资源民族主义浪潮形成"内外呼应"<br>• 战略性矿产（稀土、钨、锑、锂等）的管理将进一步收紧→出口管控预期增强<br>• 中国从"资源出口国"向"资源管理国"转型的制度基础进一步夯实<br>• 与7/1施行的《对外投资规定》形成政策组合拳→矿产企业海外投资监管趋严<br><br><strong>对资金的影响：</strong><br>• 国内矿产企业合规成本上升，中小矿企面临整合压力→行业集中度提升利好龙头企业<br>• 战略性矿产概念股（北方稀土、厦门钨业、湖南黄金）获政策催化<br>• 矿产资源储备体系建立→国家收储预期推升关键矿产现货价格<br>• 海外矿业投资监管趋严→中资矿企海外扩张步伐可能放缓，关注已布局海外的矿企（紫金矿业、洛阳钼业）的政策风险'},
  e54:{flag:'https://flagcdn.com/w40/cn.png',title:'宇树科技科创板IPO过会',date:'6月1日 周一',html:'<span class="expand-tag released">已过会</span><strong>📊 实际进展：6月1日过会，6月2日提交注册。</strong>宇树科技科创板IPO申请6月1日通过上交所上市委审议，从3月20日受理到6月1日过会仅用时<strong>73天</strong>，创2026年迄今最快IPO纪录。6月2日保荐机构中信证券向证监会报送全套注册文件，预计<strong>7月上旬</strong>正式登陆科创板，有望成为"A股人形机器人第一股"。<br><br><strong>关键信息：</strong><br>• 拟募资<strong>42.02亿元</strong>，保荐机构中信证券<br>• 发行不低于4,044.64万股A股<br>• 2025年净利润5.9亿元，2026年Q1业绩继续高增长<br>• 主营高性能通用人形机器人、四足机器人及具身智能技术解决方案<br>• 全球人形机器人出货量第一，杭州"六小龙"之一<br>• 募资用途：智能模型研发、机器人本体研发及智能制造基地建设<br><br><strong>对宏观的影响：</strong><br>• 宇树科技成为A股首家人形机器人上市公司，标志着具身智能产业进入资本化新阶段<br>• 中国人形机器人产业链从上游零部件→本体→算法→应用的资本市场布局进一步完善<br>• 国家级"硬科技"导向明确：73天极速过会反映监管层对人形机器人赛道的强力支持<br>• 与长鑫科技、长江存储形成"硬科技IPO组合拳"——半导体+机器人共同支撑科创板估值锚<br><br><strong>对资金的影响：</strong><br>• 42亿元募资额属中等规模，申购冻结资金预计<strong>500-800亿元</strong>，对A股流动性冲击有限<br>• 上市后有望带动人形机器人板块情绪催化：A股相关概念股（减速器、伺服电机、传感器）将受关注<br>• 估值参照：宇树科技作为全球人形机器人出货量第一企业，发行估值可能突破<strong>300-500亿元</strong>，成为A股稀缺的纯人形机器人标的<br>• 6月以来宇树概念股已普遍上涨，上市后可能形成短期"见光死"——但中长期资金仍以配置为主'},
+ e56:{flag:'https://flagcdn.com/w40/cn.png',title:'2026陆家嘴论坛',date:'6月17-18日',html:'<span class="expand-tag pending">待举办</span><strong>中国最高规格金融政策论坛。</strong>2026陆家嘴论坛将于6月17日至18日在上海召开，主题为"全球治理倡议下的金融发展与合作：新愿景、新挑战和新机遇"。<br><br><strong>关键信息：</strong><br>• 本届论坛由<strong>国家金融监管总局局长丁向群</strong>与<strong>上海市市长</strong>担任共同轮值主席<br>• 丁向群将出席论坛开幕式，致开幕辞并作主题演讲<br>• 论坛设有八场全体大会，涵盖"全球金融治理改革与合作""建立健全功能完善的资本市场""沪港金融协同发展赋能高水平金融开放"等议题<br>• 证监会主席等"一行一局一会"高层将出席并发表政策讲话<br>• 论坛期间将举办一系列重大项目签约和政策发布活动<br>• <strong>时间上紧邻FOMC决议（6/17凌晨）</strong>，论坛释放的中美政策信号将形成"中美政策共振"<br><br><strong>对宏观的影响：</strong><br>• 陆家嘴论坛是中国金融监管层释放年度政策信号的最重要窗口之一，与中央经济工作会议、政治局会议并列为年度三大政策观察节点<br>• "一行一局一会"高层集体亮相→金融监管协调信号集中释放，资本市场改革、金融开放、风险防控等议题可能迎来新突破<br>• 主题聚焦"全球治理"→在G20和全球金融治理改革背景下，中国可能释放参与国际金融规则制定的积极信号<br>• 沪港金融协同议题→沪港通优化、离岸人民币市场建设等政策可能取得新进展<br>• 与FOMC决议同日→中美两大经济体同日释放政策信号，全球市场波动率可能显著放大<br><br><strong>对资金的影响：</strong><br>• 若论坛释放资本市场改革利好（如降低交易成本、优化互联互通机制）→A股券商/金融IT板块短期显著受益<br>• "沪港金融协同"议题若取得实质进展→港股通扩容预期升温，南向资金情绪提振，港股流动性改善<br>• 金融监管总局局长讲话若涉及保险资金入市比例提升→保险股和蓝筹股获得增量资金预期<br>• 证监会主席讲话若涉及科创板/创业板进一步改革→硬科技板块情绪催化<br>• 政策发布活动中的重大项目签约→上海本地金融股（浦发银行、海通证券等）可能获得短线催化'},
 
  // ===== JULY =====
  j01:{flag:'https://flagcdn.com/w40/us.png',title:'NFP(6月)',date:'7月2日 周四 20:30',html:'<span class="expand-tag pending">待发布</span>6月非农就业数据。由于7月4日独立日假期，NFP提前至周四发布。<br><br>6月就业市场是否延续5月172K的强劲势头，将直接影响7/29-30 FOMC决策。'},
