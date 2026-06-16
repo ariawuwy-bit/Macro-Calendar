@@ -281,8 +281,8 @@ const allEventData = {
    12: [{id:'e21',flag:'us',name:'SpaceX挂牌SPCX',cls:'pill-ipo high',stars:'★★★'},{id:'e22',flag:'us',name:'密歇根初值',cls:'pill-data',stars:''},{id:'e23',flag:'cn',name:'华为HDC',cls:'pill-event high',stars:'★★★'},{id:'e51',flag:'cn',name:'惠科股份申购',cls:'pill-ipo',stars:'★★'},{id:'e26',flag:'cn',name:'长鑫科技注册生效',cls:'pill-ipo high',stars:'★★★'},{id:'e35',flag:'cn',name:'社融/M2/信贷',cls:'pill-cn',stars:''}],
    13: [],
    14: [{id:'e58',flag:'ir',name:'🕊️美伊停战协议',cls:'pill-trade high',stars:'★★★'}],
-   15: [{id:'e24',flag:'us',name:'工业生产(已发布)',cls:'pill-data',stars:'★'},{id:'e52',flag:'cn',name:'粤芯半导体过会',cls:'pill-ipo high',stars:'★★'},{id:'e53',flag:'cn',name:'矿产资源法实施条例',cls:'pill-cn high',stars:'★★★'},{id:'e57',flag:'fr',name:'G7峰会(埃维昂)',cls:'pill-event high',stars:'★★★'}],
-   16: [{id:'e25',flag:'jp',name:'日央行决议',cls:'pill-boj high',stars:'★★★'},{id:'e28',flag:'cn',name:'国民经济数据(已发布)',cls:'pill-cn high',stars:'★★'},{id:'e29',flag:'us',name:'新屋开工',cls:'pill-data',stars:''}],
+   15: [{id:'e24',flag:'us',name:'工业生产',cls:'pill-data',stars:'★'},{id:'e52',flag:'cn',name:'粤芯半导体过会',cls:'pill-ipo high',stars:'★★'},{id:'e53',flag:'cn',name:'矿产资源法实施条例',cls:'pill-cn high',stars:'★★★'},{id:'e57',flag:'fr',name:'G7峰会(埃维昂)',cls:'pill-event high',stars:'★★★'}],
+   16: [{id:'e25',flag:'jp',name:'日央行决议',cls:'pill-boj high',stars:'★★★'},{id:'e28',flag:'cn',name:'国民经济数据',cls:'pill-cn high',stars:'★★'},{id:'e29',flag:'us',name:'新屋开工',cls:'pill-data',stars:''}],
    17: [{id:'e30',flag:'us',name:'FOMC决议',cls:'pill-fed high',stars:'★★★'},{id:'e31',flag:'us',name:'零售销售',cls:'pill-data',stars:'★★'},{id:'e56',flag:'cn',name:'陆家嘴论坛',cls:'pill-cn high',stars:'★★★'}],
    18: [{id:'e32',flag:'gb',name:'英央行决议',cls:'pill-boe',stars:'★★'}],
    19: [{id:'e33',flag:'us',name:'Juneteenth休市',cls:'pill-event',stars:''},{id:'e59',flag:'ch',name:'美伊正式签字(瑞士)',cls:'pill-trade high',stars:'★★★'}],
@@ -303,8 +303,8 @@ const allEventData = {
    { beforeDay: 15, cls: 'central-bank-week', icon: '🏦', label: '央行超级周+地缘剧变', detail: '6/15–6/21 · G7峰会+美伊协议+BOJ+FOMC+BOE+陆家嘴论坛' }
   ],
   midMonth: { title: '📅 6月待定日期事件', pills: [
-   {id:'e27',flag:'cn',name:'长江存储IPO申请(预期)',cls:'pill-ipo',stars:'★★'},
-   {id:'e46',flag:'gn',name:'几内亚铝土矿出口管制(待出台)',cls:'pill-trade high',stars:'★★★'}
+   {id:'e27',flag:'cn',name:'长江存储IPO申请',cls:'pill-ipo',stars:'★★'},
+   {id:'e46',flag:'gn',name:'几内亚铝土矿出口管制',cls:'pill-trade high',stars:'★★★'}
   ]},
   focus: [
    {bg:'rgba(46,109,164,0.06)',bc:'#2e6da4',tc:'#2e6da4',title:'🕊️ 美伊停战',body:'6/14美伊协议达成！霍尔木兹海峡开放，伊朗石油可自由出口，布伦特原油中枢下移$8-15。6/19瑞士正式签字。60天浓缩铀谈判是后续核心风险'},
@@ -352,16 +352,16 @@ const allEventData = {
   midMonth: { title: '📅 7月待定日期事件', pills: [
    {id:'j21',flag:'cn',name:'社融/M2/信贷(中旬)',cls:'pill-cn',stars:''},
    {id:'j22',flag:'cn',name:'国民经济数据',cls:'pill-cn',stars:'★★'},
-   {id:'j36',flag:'cn',name:'长鑫存储挂牌(预期)',cls:'pill-ipo high',stars:'★★★'},
-   {id:'j37',flag:'us',name:'Anthropic路演(预期)',cls:'pill-ipo',stars:'★★★'},
-   {id:'j53',flag:'id',name:'印尼RKAB镍配额修订(预期)',cls:'pill-opec high',stars:'★★★'},
+   {id:'j36',flag:'cn',name:'长鑫存储挂牌',cls:'pill-ipo high',stars:'★★★'},
+   {id:'j37',flag:'us',name:'Anthropic路演',cls:'pill-ipo',stars:'★★★'},
+   {id:'j53',flag:'id',name:'印尼RKAB镍配额修订',cls:'pill-opec high',stars:'★★★'},
    {id:'j54',flag:'id',name:'印尼镍/煤出口关税',cls:'pill-trade high',stars:'★★★'},
    {id:'j55',flag:'cl',name:'智利锂矿国有化推进',cls:'pill-trade high',stars:'★★★'},
    {id:'j56',flag:'cd',name:'刚果钴出口配额执行',cls:'pill-trade high',stars:'★★★'},
    {id:'j59',flag:'cn',name:'中共中央政治局会议(下旬)',cls:'pill-cn high',stars:'★★★'},
    {id:'j60',flag:'pe',name:'秘鲁大选最终结果公布',cls:'pill-opec high',stars:'★★★'},
-   {id:'j61',flag:'us',name:'Databricks交表(预期仲夏)',cls:'pill-ipo high',stars:'★★★'},
-   {id:'j62',flag:'us',name:'OpenAI路演(预期Q3-Q4)',cls:'pill-ipo high',stars:'★★★'},
+   {id:'j61',flag:'us',name:'Databricks交表',cls:'pill-ipo high',stars:'★★★'},
+   {id:'j62',flag:'us',name:'OpenAI路演',cls:'pill-ipo high',stars:'★★★'},
    {id:'j64',flag:'cn',name:'沐曦股份A+H上市(6/12宣布)',cls:'pill-ipo',stars:'★★'},
    {id:'j68',flag:'cn',name:'宇树科技科创板挂牌(7月上旬)',cls:'pill-ipo high',stars:'★★★'}
   ]},
@@ -413,7 +413,7 @@ const allEventData = {
    {id:'a27',flag:'au',name:'澳洲关键矿产税激励',cls:'pill-trade',stars:'★★'},
    {id:'a28',flag:'us',name:'Kraken IPO(Q3)',cls:'pill-ipo high',stars:'★★★'},
    {id:'a29',flag:'us',name:'Canva IPO(Q3)',cls:'pill-ipo high',stars:'★★★'},
-   {id:'a30',flag:'us',name:'Databricks上市(预期)',cls:'pill-ipo high',stars:'★★★'},
+   {id:'a30',flag:'us',name:'Databricks上市',cls:'pill-ipo high',stars:'★★★'},
    {id:'a31',flag:'us',name:'Consensys IPO(推迟至秋季)',cls:'pill-ipo',stars:'★★'}
   ]},
   focus: [
