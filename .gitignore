@@ -1,4 +1,4 @@
-﻿# WorkBuddy AI working memory (contains private info)
+# WorkBuddy AI working memory (contains private info)
 .workbuddy/
 
 # OS files
@@ -11,3 +11,10 @@ desktop.ini
 .idea/
 *.swp
 *.swo
+
+# Only sync HTML files to GitHub, ignore all scripts and temp files
+*.py
+*.js
+*.txt
+push_log.txt
+.file_state.json
