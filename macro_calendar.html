@@ -288,7 +288,7 @@ const allEventData = {
    27: [{id:'e41',flag:'cn',name:'工业效益月报',cls:'pill-cn',stars:''}],
    28: [],
    29: [{id:'e65',flag:'us',name:'巴尔金讲话',cls:'pill-fed high',stars:'★★'},{id:'e66',flag:'eu',name:'ECB辛特拉论坛',cls:'pill-ecb high',stars:'★★'}],
-   30: [{id:'e42',flag:'cn',name:'中国6月官方制造业PMI',cls:'pill-cn high',stars:'★★'},{id:'e43',flag:'us',name:'美国JOLTS(5月)',cls:'pill-data',stars:'★★'},{id:'e45',flag:'us',name:'232铜关税报告截止',cls:'pill-trade high',stars:'★★★'},{id:'e36',flag:'us',name:'美国消费者信心',cls:'pill-data',stars:''},{id:'e67',flag:'ch',name:'美伊技术性谈判',cls:'pill-trade high',stars:'★★★'}]
+   30: [{id:'e42',flag:'cn',name:'中国6月官方制造业PMI',cls:'pill-cn high',stars:'★★'},{id:'e43',flag:'us',name:'美国JOLTS(5月)',cls:'pill-data',stars:'★★'},{id:'e45',flag:'us',name:'232铜关税报告截止',cls:'pill-trade high',stars:'★★★'},{id:'e36',flag:'us',name:'美国消费者信心',cls:'pill-data',stars:''},{id:'e68',flag:'us',name:'美国房价指数',cls:'pill-data',stars:''},{id:'e69',flag:'us',name:'美国芝加哥PMI',cls:'pill-data',stars:''},{id:'e67',flag:'ch',name:'美伊技术性谈判',cls:'pill-trade high',stars:'★★★'}]
   },
   weekBanners: [
    { beforeDay: 8, cls: 'tech-week', icon: '🖥️', label: '科技超级周', detail: '6/8–6/14 · WWDC+HDC+智谱/MiniMax入恒科+SpaceX+OpenAI递表' },
@@ -309,8 +309,8 @@ const allEventData = {
  '2026-7': {
   events: {
    1: [{id:'j63',flag:'cn',name:'对外投资新规施行',cls:'pill-cn',stars:'★'},{id:'j72',flag:'us',name:'Sintra央行论坛',cls:'pill-fed high',stars:'★★★'},{id:'j73',flag:'us',name:'ADP就业',cls:'pill-data',stars:'★★'},{id:'j02',flag:'us',name:'美国ISM制造业PMI',cls:'pill-data',stars:'★★'}],
-   2: [{id:'j01',flag:'us',name:'美国非农+失业率',cls:'pill-fed high',stars:'★★★'},{id:'j76',flag:'us',name:'美国初请失业金',cls:'pill-data high',stars:'★★'},{id:'j23',flag:'us',name:'美国建筑业支出',cls:'pill-data',stars:''}],
-   3: [],
+   2: [{id:'j01',flag:'us',name:'美国非农+失业率',cls:'pill-fed high',stars:'★★★'},{id:'j76',flag:'us',name:'美国初请失业金',cls:'pill-data high',stars:'★★'},{id:'j23',flag:'us',name:'美国建筑业支出',cls:'pill-data',stars:''},{id:'j77',flag:'us',name:'美国工厂订单',cls:'pill-data',stars:''},{id:'j79',flag:'us',name:'美股美债提前收盘',cls:'pill-event',stars:'★'}],
+   3: [{id:'j78',flag:'us',name:'美股美债休市',cls:'pill-event',stars:'★'}],
    4: [{id:'j03',flag:'us',name:'独立日休市',cls:'pill-event',stars:''},{id:'j25',flag:'un',name:'⚽世界杯1/4决赛',cls:'pill-event',stars:'★★'}],
    5: [{id:'j74',flag:'un',name:'OPEC+产量复核',cls:'pill-opec high',stars:'★★★'}],
    6: [{id:'j24',flag:'us',name:'美国ISM服务业PMI',cls:'pill-data',stars:'★★'}],
@@ -567,7 +567,12 @@ const eventData = {
  e65:{flag:'https://flagcdn.com/w40/us.png',title:'巴尔金讲话',date:'6月29日 周一 00:35',html:'<span class="expand-tag pending">待讲话</span><strong>2027年FOMC票委、里奇蒙联储主席巴尔金发表讲话。</strong>关注其对通胀、就业和利率路径的表述。若继续强调服务通胀和劳动力市场韧性，短端美债收益率可能获得支撑；若承认就业降温，市场会重新评估9月政策空间。'},
  e66:{flag:'https://flagcdn.com/w40/eu.png',title:'ECB辛特拉中央银行论坛',date:'6月29日 周一-7月1日 周三',html:'<span class="expand-tag pending">待举办</span><strong>欧洲央行在葡萄牙辛特拉举行中央银行论坛，持续至7月1日。</strong>这是欧美主要央行集中释放政策信号的窗口，后续7月1日多位央行行长同场讲话会成为市场关注焦点。'},
  e67:{flag:'https://flagcdn.com/w40/ch.png',title:'美伊技术性谈判',date:'6月30日 周二 待定',html:'<span class="expand-tag pending">待举行</span><strong>美伊举行技术性谈判。</strong>关注制裁豁免、能源通航机制和后续协议执行细节。若谈判顺利，能源风险溢价可能回落；若破裂，油价、黄金和避险资产波动可能放大。'},
+ e68:{flag:'https://flagcdn.com/w40/us.png',title:'美国房价指数',date:'6月30日 周二 21:00',html:'<span class="expand-tag pending">待发布</span><strong>美国4月FHFA房价指数与S&P CoreLogic Case-Shiller房价指数。</strong>房价数据会影响住房通胀、居民资产负债表和地产链情绪。若房价继续坚挺，服务通胀和租金粘性的担忧会升温；若明显降温，长端利率和地产股可能获得缓冲。'},
+ e69:{flag:'https://flagcdn.com/w40/us.png',title:'美国芝加哥PMI',date:'6月30日 周二 21:45',html:'<span class="expand-tag pending">待发布</span><strong>美国6月芝加哥商业景气指数。</strong>这是ISM制造业前的区域制造业观察窗口，关注新订单、就业和价格分项。若与S&P制造业PMI背离，市场会更重视7月1日ISM制造业PMI。'},
  j76:{flag:'https://flagcdn.com/w40/us.png',title:'美国初请失业金',date:'7月2日 周四 20:30',html:'<span class="expand-tag pending">待发布</span><strong>美国至6月27日当周初请失业金人数。</strong>与同日非农、失业率一起观察劳动力市场是否降温。若初请继续上行，会强化就业拐点叙事；若维持低位，则支持“就业仍有韧性”的高利率逻辑。'},
+ j77:{flag:'https://flagcdn.com/w40/us.png',title:'美国工厂订单',date:'7月2日 周四 22:00',html:'<span class="expand-tag pending">待发布</span><strong>美国5月工厂订单。</strong>与同一时点的建筑业支出一起观察制造业和投资需求。若订单明显走弱，会强化PMI就业分项降温后的增长压力；若超预期改善，则支撑“制造业仍有韧性”的叙事。'},
+ j78:{flag:'https://flagcdn.com/w40/us.png',title:'美股美债休市',date:'7月3日 周五',html:'<span class="expand-tag pending">假期休市</span><strong>美国市场因独立日观察日休市。</strong>独立日落在周六，主要市场通常在周五观察假期。长周末前后流动性下降，非农发布后的仓位调整可能提前完成，尾盘和隔夜波动需要留意。'},
+ j79:{flag:'https://flagcdn.com/w40/us.png',title:'美股美债提前收盘',date:'7月2日 周四',html:'<span class="expand-tag pending">提前收盘</span><strong>独立日假期前，美国股市和债市提前收盘。</strong>同日叠加非农、失业率和初请失业金，数据发布后可交易窗口缩短，流动性和收盘前调仓压力可能放大。'},
  j56:{flag:'https://flagcdn.com/w40/cd.png',title:'刚果（金）钴出口配额制执行情况',date:'7月 待定',html:'<span class="expand-tag pending">持续跟踪</span><strong>全球钴供给最关键的政策变量。</strong><br><br>2025年10月16日，刚果（金）结束长达7个月的钴出口禁令，正式实施年度出口配额制。ARECOMS（战略矿产市场监管局）设定2026-2027年年度出口配额<strong>9.66万吨</strong>，约为2024年出口量的一半。<br><br><strong>配额制核心条款：</strong><br>• 2025年Q4配额18,125吨（10月3,625吨、11月5,000吨、12月9,500吨）<br>• 2026年全年配额9.66万吨，获批复的21家企业按配额出口<br>• 手工采矿产出的钴同样纳入配额管理<br>• 配额分配向合规企业倾斜，小规模/非正规矿企出口受限<br><br><strong>对宏观的影响：</strong><br>• 刚果钴产量占全球~70%，配额9.66万吨仅为2024年出口量的一半→全球钴供给系统性收紧<br>• 钴价已从禁令期间低点回升，配额制下钴价中枢将永久上移<br>• 电动车三元电池成本承压→可能加速磷酸铁锂（LFP）路线替代<br>• 刚果政策是"资源国议价权上升"趋势最极端的案例，可能催生全球钴的OPEC式卡特尔<br><br><strong>对资金的影响：</strong><br>• 钴价上行→持有刚果钴矿的中资企业（洛阳钼业/华友钴业/寒锐钴业）受益于价格弹性<br>• 但配额制限制出口量→"价涨量缩"，实际利润增幅取决于配额分配<br>• 三元正极材料企业（容百科技、当升科技）成本端持续承压，LFP替代逻辑强化<br>• 刚果矿业政策风险溢价→国际矿业资本对刚果新投资持观望态度，长期供给增速受限<br>• 关注每季度ARECOMS配额执行报告——若实际出口远低于配额→钴价进一步上行'},
 /* ===== AUGUST ===== */
  a01:{flag:'https://flagcdn.com/w40/au.png',title:'RBA会议',date:'8月4日 周一',html:'<span class="expand-tag pending">待决议</span>8月澳洲央行利率决议。'},
