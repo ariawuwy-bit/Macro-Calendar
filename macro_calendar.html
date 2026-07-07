@@ -305,7 +305,8 @@ const allEventData = {
    {id:'j61',flag:'us',name:'Databricks交表',cls:'pill-ipo high',stars:'★★★'},
    {id:'j62',flag:'us',name:'OpenAI路演',cls:'pill-ipo high',stars:'★★★'},
    {id:'j68',flag:'cn',name:'宇树科技科创板挂牌(7月上旬)',cls:'pill-ipo high',stars:'★★'},
-   {id:'j70',flag:'cn',name:'中际旭创港股IPO(7月中旬)',cls:'pill-ipo high',stars:'★★★'}
+   {id:'j70',flag:'cn',name:'中际旭创港股IPO(7月中旬)',cls:'pill-ipo high',stars:'★★★'},
+   {id:'j88',flag:'ir',name:'伊朗/霍尔木兹局势',cls:'pill-opec high',stars:'★★★'}
   ]},
   focus: [
    {bg:'var(--red-bg)',bc:'var(--red)',tc:'var(--red)',title:'FOMC决议',body:'7/28-29 FOMC会议，6月点阵图后首次决议，是否释放9月降息信号是核心关注'},
@@ -332,7 +333,7 @@ const allEventData = {
    11: [{id:'a01',flag:'au',name:'RBA决议',cls:'pill-rba',stars:'★★'},{id:'a10',flag:'us',name:'美国成屋销售',cls:'pill-data',stars:''}],
    12: [{id:'a06',flag:'us',name:'美国CPI(7月)',cls:'pill-fed high',stars:'★★★'},{id:'a42',flag:'un',name:'OPEC月度石油报告',cls:'pill-opec',stars:'★'}],
    13: [{id:'a07',flag:'us',name:'美国7月PPI',cls:'pill-data',stars:''}],
-   14: [{id:'a38',flag:'us',name:'美国零售销售',cls:'pill-data',stars:'★★'},{id:'a21',flag:'us',name:'美国密歇根初值',cls:'pill-data',stars:''}],
+   14: [{id:'a45',flag:'ir',name:'美伊最终协议截止(60天)',cls:'pill-opec high',stars:'★★★'},{id:'a38',flag:'us',name:'美国零售销售',cls:'pill-data',stars:'★★'},{id:'a21',flag:'us',name:'美国密歇根初值',cls:'pill-data',stars:''}],
   15: [],
   17: [{id:'a20',flag:'cn',name:'中国国民经济数据',cls:'pill-cn',stars:'★★'}],
    18: [{id:'a39',flag:'us',name:'美国工业生产',cls:'pill-data',stars:''},{id:'a08',flag:'us',name:'美国新屋开工',cls:'pill-data',stars:''},{id:'a41',flag:'us',name:'美国成屋签约',cls:'pill-data',stars:''}],
@@ -407,7 +408,8 @@ const allEventData = {
    {id:'s46',flag:'cl',name:'智利锂/铜政策',cls:'pill-trade high',stars:'★★'},
    {id:'s47',flag:'us',name:'美国金属关税/232',cls:'pill-trade high',stars:'★★'},
    {id:'s48',flag:'cn',name:'国庆前SHFE风控',cls:'pill-event high',stars:'★★'},
-   {id:'s49',flag:'us',name:'美元/TGA/RRP流动性',cls:'pill-fed high',stars:'★★★'}
+   {id:'s49',flag:'us',name:'美元/TGA/RRP流动性',cls:'pill-fed high',stars:'★★★'},
+   {id:'s52',flag:'in',name:'BRICS峰会(印度主办)',cls:'pill-trade high',stars:'★★'}
   ]},
   focus: [
    {bg:'var(--red-bg)',bc:'var(--red)',tc:'var(--red)',title:'FOMC点阵图',body:'9/15-16 FOMC会议附带SEP点阵图，是Jackson Hole后首次正式利率决议。核心看9月是否确认政策转向，以及2026年底利率中值是否下修。'},
@@ -550,6 +552,9 @@ const eventData = {
  a40:{flag:'https://flagcdn.com/w40/us.png',title:'美国新屋销售',date:'8月25日 周二 22:00',html:'<span class="expand-tag pending">待发布</span>7月新屋销售。与成屋销售、新屋开工共同刻画地产链景气；高利率下地产需求的边际变化是降息传导效果的观察点。'},
  a41:{flag:'https://flagcdn.com/w40/us.png',title:'美国成屋签约',date:'8月18日 周二 22:00',html:'<span class="expand-tag pending">待发布</span><strong>美国7月Pending Home Sales Index。</strong>NAR官方统计发布日程显示发布时间为8月18日10:00 ET。签约领先成交约1-2个月，是地产成交的先行指标。'},
  a44:{flag:'https://flagcdn.com/w40/us.png',title:'美国非农基准修正初估',date:'8月28日 周五 22:00',html:'<span class="expand-tag pending">待发布</span><strong>2026年非农就业基准修正初估。</strong>BLS在6月就业报告中说明，将于8月28日10:00 ET发布即将到来的年度 establishment survey benchmark revision 初步估计。该修正可能显著改写过去一年就业强弱叙事，但正式修正要到2027年2月随1月就业报告发布。'},
+ j88:{flag:'https://flagcdn.com/w40/ir.png',title:'伊朗/霍尔木兹局势',date:'7月 持续跟踪',html:'<span class="expand-tag pending">持续跟踪</span><strong>当前头号油价/大宗地缘风险。</strong>2026年霍尔木兹危机延续：2/28美以对伊朗动武后海峡航运一度受阻，6/15美伊达成初步协议、开启<strong>60天谈判窗口（约8月中到期）</strong>解决核问题；美方由副总统万斯、伊方由议长卡利巴夫主谈，卡塔尔/巴基斯坦斡旋。<br><br><strong>最新状态：</strong><br>• 航运恢复中但仍远低于战前（上周约258船次过峡 vs 战前日均约130船）<br>• 伊朗警告油轮须走"批准航线"否则"强力回应"，并欲对通行收费、控制航线——美与海湾国家拒绝<br>• 60天免费通行临时安排 vs 伊朗收费诉求，是主要摩擦点<br><br><strong>对宏观/大宗的影响：</strong><br>• 全球约1/5原油、大量LNG经此运输——任何再封锁/扣船→布伦特跳涨、油运费飙升、通胀预期反弹<br>• 谈判进展顺利→风险溢价继续回落，利于CPI能源项降温<br>• 黄金、原油、油运、避险美元对每一次事件头条高度敏感<br><br><em>关注8月中旬60天窗口到期（见8/14"美伊最终协议截止"）。</em>'},
+ a45:{flag:'https://flagcdn.com/w40/ir.png',title:'美伊最终协议截止(60天)',date:'8月14日 周五前后',html:'<span class="expand-tag pending">待跟踪</span><strong>大宗地缘的重磅截止日。</strong>6/15美伊初步协议设定<strong>60天谈判窗口，约8月14–15日到期</strong>，须在此前就伊朗核（浓缩铀水平、高浓缩铀库存处置）与霍尔木兹通航/收费机制达成最终协议。<br><br><strong>两种情形：</strong><br>• <strong>达成最终协议→</strong>能源风险溢价大幅回落，油价中枢下移、利好全球通胀回落与风险资产；伊朗石油潜在回归增加供给<br>• <strong>破裂/延期→</strong>霍尔木兹再度紧张甚至封锁风险重燃，布伦特跳涨、黄金避险、美元走强，冲击通胀与央行路径<br><br><strong>对资金：</strong>截止日前后是7-8月油价与避险交易的关键事件窗口，原油、黄金、油运及能源股波动料放大。<br><br><em>注：60天自6/15起算，确切公告日临近确认。</em>'},
+ s52:{flag:'https://flagcdn.com/w40/in.png',title:'BRICS峰会(印度主办)',date:'9月 待定',html:'<span class="expand-tag pending">待定</span><strong>2026年金砖峰会，印度第四次担任主席国，主题"韧性、创新、合作与可持续"。</strong>议程含成员国央行数字货币(CBDC)互联互通、发展融资、贸易便利化与全球治理改革等。<br><br><strong>对宏观/大宗的影响：</strong><br>• 去美元化/本币结算与CBDC互联若有实质推进→中长期利多黄金、扰动美元储备地位叙事<br>• 金砖扩员与资源国(产油、产铜、产锂国)协调→影响大宗定价权与贸易流向<br>• 短期多为宣示性，关注是否落地具体机制<br><br><em>注：具体日期待官方确认。</em>'},
  j82:{flag:'https://flagcdn.com/w40/us.png',title:'美国精炼铜232关税决定',date:'7月 待定',html:'<span class="expand-tag pending">持续跟踪</span><strong>铜市年度最大政策变量。</strong>美国商务部长须于6月30日前向总统提交美国铜市场评估报告，之后总统可决定是否对<strong>精炼铜（阴极铜）</strong>加征232关税。目前半成品铜（管/线/棒/板）自2025年8月起已征50%、含铜衍生品25%，2026年4月起改按全额报关价计征——但精炼铜尚未被覆盖。<br><br><strong>对宏观/大宗的影响：</strong><br>• 若对精炼铜开征关税→美国进口成本骤升，<strong>COMEX-LME价差（Comex升水）将再度走阔</strong>，套利与实物流向重构<br>• 美国买家抢跑补库→短期抽紧LME可交割库存，扭曲全球升贴水<br>• 智利/秘鲁/墨西哥等对美精炼铜出口国承压，长期利好美国本土冶炼与废铜<br>• 若仅维持半成品口径、精炼铜豁免→价差回归，市场松一口气<br><br><strong>对资金：</strong>决定公布前后沪铜/LME铜/COMEX铜三地价差波动放大，跨市套利与月间价差是主战场。<br><br><em>注：决定无固定日期，为6/30报告后的政策窗口，持续跟踪官宣。</em>'},
  j83:{flag:'https://flagcdn.com/w40/us.png',title:'美国关税/USMCA节点',date:'7月24日 周五',html:'<span class="expand-tag pending">待跟踪</span><strong>7月美国贸易政策双节点。</strong><br><br><strong>① Section 122 附加关税到期（7/24）：</strong>最高法院此前否决对等关税后，政府援引《1974年贸易法》第122条对几乎所有国家加征10%普遍性附加关税，法定期限150天，<strong>若国会不延长则7月24日到期</strong>。国际贸易法院5月已裁定其违法、正在上诉，关税仍在征收——到期/续期与司法结果共同决定这堵"关税墙"去留。<br><br><strong>② USMCA联合审查：</strong>美墨加协定按第34.7条定于2026年启动六年期联合审查，7月进入实质阶段，其中包含是否维持/豁免对加墨的钢铝232关税。<br><br><strong>对宏观/大宗的影响：</strong><br>• 10%普遍关税若到期取消→进口成本下行、通胀压力缓和、美元走弱；若续期或以301/232重构→贸易不确定性延续<br>• 钢/铝/铜及汽车产业链对USMCA审查高度敏感，关税豁免范围变化直接影响北美金属贸易流<br>• 与9月s47金属关税/232形成贯穿下半年的贸易政策主线'},
  j84:{flag:'https://flagcdn.com/w40/un.png',title:'OPEC月度石油市场报告',date:'7月13日 周一',html:'<span class="expand-tag pending">待发布</span>OPEC月度石油市场报告（MOMR）。更新全球原油需求增长预测、非OPEC供应、以及成员国产量（二手来源）估计。市场关注对下半年需求的上/下修与OPEC+增产执行情况，是油价与能源通胀假设的月度锚点。IEA月报通常随后发布，可交叉验证供需口径。'},
