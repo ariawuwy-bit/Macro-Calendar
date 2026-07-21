@@ -3,9 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!-- last updated: 2026-07-12 18:35 -->
 <title>全球宏观事件日程表</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&family=Noto+Sans+SC:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
  :root {
   --bg-primary: #f3ede2;
@@ -165,7 +164,6 @@
  .grid-week-banner .banner-label { font-weight: 700; letter-spacing: 1px; }
  .grid-week-banner .banner-sep { width: 1px; height: 12px; background: rgba(0,0,0,0.12); flex-shrink: 0; }
  .grid-week-banner .banner-detail { font-weight: 400; font-size: 10px; opacity: 0.8; }
- .grid-week-banner.tech-week { background: linear-gradient(135deg, rgba(107,138,30,0.06) 0%, rgba(184,148,62,0.04) 100%); color: var(--lime); border: 1px solid rgba(107,138,30,0.12); }
  .grid-week-banner.central-bank-week { background: linear-gradient(135deg, rgba(192,57,43,0.06) 0%, rgba(184,148,62,0.04) 100%); color: var(--red); border: 1px solid rgba(192,57,43,0.12); }
  .mid-month-box { margin: 12px 0; padding: 12px 18px; background: linear-gradient(135deg, rgba(212,118,10,0.03) 0%, rgba(184,148,62,0.02) 100%); border: 1px solid rgba(212,118,10,0.10); border-radius: 8px; backdrop-filter: blur(8px); }
  .mid-month-title { font-size: 11px; font-weight: 500; color: var(--orange); margin-bottom: 4px; }
@@ -189,7 +187,6 @@
  }
  @media (max-width: 768px) {
   .header-title { font-size: 24px; letter-spacing: 4px; }
-  .header-subtitle { font-size: 13px; letter-spacing: 2px; }
   .calendar-grid { grid-template-columns: repeat(7, 1fr); gap: 2px; }
   .day-cell { min-height: 60px; padding: 3px; }
   .event-pill { font-size: 8px; padding: 2px 3px; }
@@ -259,8 +256,8 @@ const allEventData = {
  // ===== JULY 2026 =====
  '2026-7': {
   events: {
-   1: [{id:'j63',flag:'cn',name:'对外投资新规施行',cls:'pill-cn',stars:'★'},{id:'j72',flag:'us',name:'Sintra央行论坛',cls:'pill-fed high',stars:'★★★'},{id:'j73',flag:'us',name:'ADP就业',cls:'pill-data',stars:'★★'},{id:'j02',flag:'us',name:'美国ISM制造业PMI',cls:'pill-data',stars:'★★'},{id:'j53',flag:'id',name:'印尼RKAB修订窗口',cls:'pill-opec high',stars:'★★★'}],
-   2: [{id:'j01',flag:'us',name:'美国非农+失业率',cls:'pill-fed high',stars:'★★★'},{id:'j76',flag:'us',name:'美国初请失业金',cls:'pill-data high',stars:'★★'},{id:'j23',flag:'us',name:'美国建筑业支出',cls:'pill-data',stars:''},{id:'j77',flag:'us',name:'美国工厂订单',cls:'pill-data',stars:''},{id:'j79',flag:'us',name:'美股美债提前收盘',cls:'pill-event',stars:'★'}],
+   1: [{id:'j63',flag:'cn',name:'对外投资新规施行',cls:'pill-cn',stars:'★'},{id:'j72',flag:'us',name:'Sintra央行论坛',cls:'pill-fed high',stars:'★★★'},{id:'j73',flag:'us',name:'ADP就业',cls:'pill-data',stars:'★★'},{id:'j02',flag:'us',name:'美国ISM制造业PMI',cls:'pill-data',stars:'★★'},{id:'j53',flag:'id',name:'印尼RKAB修订窗口',cls:'pill-opec high',stars:'★★★'},{id:'j30',flag:'us',name:'Lime纳斯达克上市',cls:'pill-ipo',stars:'★'}],
+   2: [{id:'j01',flag:'us',name:'美国非农+失业率',cls:'pill-fed high',stars:'★★★'},{id:'j76',flag:'us',name:'美国初请失业金',cls:'pill-data high',stars:'★★'},{id:'j23',flag:'us',name:'美国建筑业支出',cls:'pill-data',stars:''},{id:'j77',flag:'us',name:'美国工厂订单',cls:'pill-data',stars:''},{id:'j79',flag:'us',name:'美股美债提前收盘',cls:'pill-event',stars:'★'},{id:'j71',flag:'cn',name:'核心医疗上会(临时取消)',cls:'pill-ipo',stars:'★'},{id:'j69',flag:'cn',name:'华润新能源挂牌(+137%)',cls:'pill-ipo',stars:'★'}],
    3: [{id:'j78',flag:'us',name:'美股美债休市',cls:'pill-event',stars:'★'},{id:'j60',flag:'pe',name:'秘鲁大选最终结果公布',cls:'pill-opec high',stars:'★★★'}],
    4: [],
    5: [{id:'j74',flag:'un',name:'OPEC+产量复核',cls:'pill-opec high',stars:'★★★'}],
@@ -301,7 +298,8 @@ const allEventData = {
    {id:'j61',flag:'us',name:'Databricks交表',cls:'pill-ipo high',stars:'★★★'},
    {id:'j62',flag:'us',name:'OpenAI路演',cls:'pill-ipo high',stars:'★★★'},
    {id:'j68',flag:'cn',name:'宇树科技科创板挂牌(7月底-8月初)',cls:'pill-ipo high',stars:'★★'},
-   {id:'j70',flag:'cn',name:'中际旭创港股IPO(已过聆讯)',cls:'pill-ipo high',stars:'★★★'}
+   {id:'j70',flag:'cn',name:'中际旭创港股IPO(已过聆讯)',cls:'pill-ipo high',stars:'★★★'},
+   {id:'j64',flag:'cn',name:'沐曦股份A+H启动',cls:'pill-ipo',stars:'★'}
   ]},
   focus: [
    {bg:'var(--red-bg)',bc:'var(--red)',tc:'var(--red)',title:'FOMC决议',body:'7/28-29 FOMC会议，6月点阵图后首次决议，是否释放9月降息信号是核心关注'},
@@ -321,7 +319,7 @@ const allEventData = {
    3: [{id:'a17',flag:'us',name:'美国ISM制造业PMI',cls:'pill-data',stars:'★★'},{id:'a33',flag:'us',name:'美国建筑支出',cls:'pill-data',stars:''}],
    4: [{id:'j20',flag:'us',name:'美国JOLTS职位空缺',cls:'pill-data',stars:'★★'},{id:'a34',flag:'us',name:'美国工厂订单',cls:'pill-data',stars:''}],
    5: [{id:'a36',flag:'us',name:'ADP私营就业',cls:'pill-data',stars:'★★'},{id:'a35',flag:'us',name:'美国贸易帐',cls:'pill-data',stars:'★'},{id:'a18',flag:'us',name:'美国ISM非制造业PMI',cls:'pill-data',stars:'★★'}],
-   6: [],
+   6: [{id:'a02',flag:'in',name:'印度央行RBI决议',cls:'pill-rba',stars:'★'}],
    7: [{id:'a04',flag:'us',name:'美国NFP(7月)',cls:'pill-fed high',stars:'★★★'},{id:'a37',flag:'cn',name:'中国进出口',cls:'pill-cn',stars:'★★'}],
    9: [{id:'a05',flag:'cn',name:'中国CPI/PPI',cls:'pill-cn',stars:'★★'}],
   10: [],
@@ -353,7 +351,9 @@ const allEventData = {
    {id:'a27',flag:'au',name:'澳洲关键矿产税激励',cls:'pill-trade',stars:'★★'},
    {id:'a28',flag:'us',name:'Kraken IPO(Q3)',cls:'pill-ipo high',stars:'★★★'},
    {id:'a29',flag:'us',name:'Canva IPO(Q3)',cls:'pill-ipo high',stars:'★★★'},
-   {id:'a30',flag:'us',name:'Databricks上市',cls:'pill-ipo high',stars:'★★★'}
+   {id:'a30',flag:'us',name:'Databricks上市',cls:'pill-ipo high',stars:'★★★'},
+   {id:'a26',flag:'us',name:'Oura Ring IPO(Q3)',cls:'pill-ipo',stars:'★'},
+   {id:'a31',flag:'us',name:'Consensys IPO(推迟至秋季)',cls:'pill-ipo',stars:'★'}
   ]},
   focus: [
    {bg:'var(--red-bg)',bc:'var(--red)',tc:'var(--red)',title:'Jackson Hole',body:'8/27-29全球央行年会，沃什8/28演讲通常释放9月FOMC政策转向信号，是全年最重要央行沟通事件'},
@@ -479,7 +479,7 @@ const eventData = {
  a46:{flag:'https://flagcdn.com/w40/cn.png',title:'中国工业企业利润',date:'8月27日 周四 09:30',html:'<span class="expand-tag pending">待发布</span>7月规模以上工业企业利润。延续观察PPI回升向利润端的传导、上下游利润分配与库存周期位置。'},
  s53:{flag:'https://flagcdn.com/w40/us.png',title:'美联储褐皮书',date:'9月3日 周四 02:00',html:'<span class="expand-tag pending">待发布</span><strong>9月褐皮书（美东9/2 14:00发布），9/15-16 FOMC前最重要的地区经济调查。</strong>联储官方日程确认9/2发布。关注：企业价格传导(关税+能源成本)是否增强、劳动力市场是否从"低招聘"转向实际裁员、以及地区制造业与消费的分化。若偏滞胀→9月FOMC(带点阵图)更难转鸽；偏软着陆→风险资产与久期受益。'},
  s54:{flag:'https://flagcdn.com/w40/un.png',title:'OPEC月度石油市场报告',date:'9月10日 周四',html:'<span class="expand-tag pending">待发布</span>OPEC月度石油市场报告（MOMR）。自愿减产退出收官期(9月底)的关键月报——关注需求预测修正、成员国实际产量与配额纪律，以及对Q4供需平衡的判断。与9/11美国8月CPI前后脚，油价假设直接影响通胀交易。'},
- j30:{flag:'https://flagcdn.com/w40/us.png',title:'Lime IPO',date:'7月11日 周六',html:'<span class="expand-tag pending">待上市</span>电动滑板车/自行车共享公司Lime纳斯达克挂牌，代码LIME。5月8日已交表，Goldman Sachs和JPMorgan主承销。募资规模待定，估值约$20–30亿。<br><br><strong>资金影响：</strong><br>• 中小型IPO，募资规模约$3–5亿，对市场整体流动性影响有限<br>• 上市当日共享出行板块（Uber、Lyft等）可能受到情绪联动，小盘科技股申购资金短暂冻结<br>• 成功上市将验证2026年IPO市场的风险偏好是否延伸至非AI赛道中型企业<br><br><strong>宏观影响：</strong><br>• Lime盈利能力弱、单位经济亏损，其IPO成功与否是市场风险偏好的"边际温度计"<br>• 若估值受追捧→说明市场流动性充裕，risk-on模式延续；若破发→市场开始区分AI龙头与普通科技股'},
+ j30:{flag:'https://flagcdn.com/w40/us.png',title:'Lime纳斯达克上市',date:'7月1日 周三',html:'<span class="expand-tag released">已上市</span><strong>Lime 7/1登陆纳斯达克（代码LIME）：发行价25美元/股（区间24-26中值），发行668万股募资约1.74亿美元；开盘27美元、较发行价+8%，市值约17亿美元。</strong><br><br>• 最大股东Uber在发行中认购至多2,000万美元<br>• 全球最大共享微出行公司，累计骑行超10亿次<br><br><strong>对资金的影响：</strong>中小规模IPO、对流动性影响有限；温和上涨而非爆炒，显示市场风险偏好延伸至非AI中型企业但保持理性——IPO窗口健康度的"边际温度计"读数中性偏暖。'},
  j31:{flag:'https://flagcdn.com/w40/us.png',title:'美国零售销售',date:'7月16日 周四 20:30',html:'<span class="expand-tag released">已发布</span><strong>美国6月零售销售环比+0.2%（总额7,686亿美元）、同比+6.7%；剔除加油站后环比+0.7%——油价回落拖累总量，核心消费仍具韧性。</strong><br><br>• 加油站销售环比-5.3%（汽油价格回落所致），为最大拖累项<br>• 非店铺零售(电商)环比+1.9%，为各大类最大涨幅<br>• Q2零售总额同比+6.4%<br><br><strong>解读：</strong>剔除油价扰动后消费动能不弱，与7/2偏弱非农形成对照；叠加6月CPI偏热与沃勒"考虑加息"表态，7/29 FOMC的加息博弈边际偏鹰。世界杯对餐饮的提振未成主导因素。<br><br><strong>对资金的影响：</strong>消费韧性支撑美元与短端利率、压制黄金；汽油销售下滑主因价格回落而非需求恶化，对油价中性。'},
  j32:{flag:'https://flagcdn.com/w40/us.png',title:'美国工业生产',date:'7月17日 周五 21:15',html:'<span class="expand-tag released">已发布</span><strong>美国6月工业生产环比+0.1%、同比+1.1%；产能利用率76.1%持平前月，低于长期均值约3个百分点；制造业产出环比持平。</strong><br><br><strong>解读：</strong>工业端温吞——既无衰退信号也无过热迹象，产能利用率远低于80%的通胀警戒线，工业部门不构成额外通胀压力。经济呈"消费韧性+地产分化+工业平淡"组合。<br><br><strong>对资金的影响：</strong>数据中性，对7/29 FOMC加息博弈影响有限；制造业平淡对工业金属实际需求端无增量信号。'},
  j33:{flag:'https://flagcdn.com/w40/un.png',title:'世界杯决赛（西班牙vs阿根廷）',date:'7月20日 周一 03:00（美东7/19 15:00开球）',html:'<span class="expand-tag pending">待举办</span><strong>2026美加墨世界杯决赛：欧洲冠军西班牙 vs 卫冕冠军阿根廷，新泽西MetLife球场，北京时间7/20凌晨03:00开球。</strong><br><br>• 世界杯史上首次由两支现任洲际冠军会师决赛，且为FIFA排名前二对决<br>• 半决赛：西班牙2-0法国；阿根廷2-1逆转英格兰<br><br><strong>对资金的影响：</strong>赛事收官意味着持续一个月的美国服务消费脉冲（酒店、餐饮、出行与门票）见顶回落，6-7月零售餐饮分项的世界杯提振因素随之消退，后续数据解读需剔除该基数效应。'},
@@ -501,9 +501,9 @@ const eventData = {
  j66:{flag:'https://flagcdn.com/w40/hk.png',title:'智谱港股基石解禁(11.6%)',date:'7月8日 周三',html:'<span class="expand-tag released">已解禁</span><strong>7月8日基石解禁到来：约11家基石、约2568万股(占约11.6%)解除限售，按7/7收盘价解禁市值超400亿港元。</strong>关键缓冲——解禁前夕多家机构公开表态长期持有、合计占本次解禁基石股数近七成(含国家级战略资本、地方产业引导基金、大型国企及市场化机构)，缓解即时抛压。<strong>解禁首日(7/8)股价逆势大涨超13%，抛压担忧暂证伪（与次日MiniMax解禁大跌形成对比）。</strong>此前股价已从6/22盘中高点2980港元回落至7/7收盘1610港元(市值约7178亿)；流通盘小、易被资金撬动，需看后续实际减持。<br><br><strong>港股AI/硬科技2026年首个解禁高峰节点。</strong>智谱（02513.HK）今年1月上市，按港股6个月基石锁定规则，<strong>7月8日</strong>基石投资者持有的约<strong>11.6%</strong>股票解禁。中金分析指出，持仓占比最高的两家公募和早期VC浮盈超16倍，减持动机强烈。<br><br><strong>关键信息：</strong><br>• 解禁比例：约11.6%（占港股股本）<br>• 6/8刚被纳入恒生科技指数+港股通→被动资金承接+主动调仓压力并存<br>• 6月11日数据显示智谱6月以来已下跌<strong>33.48%</strong>→市场提前计价解禁压力<br>• 华泰证券预测：7月港股解禁总规模约1,500亿港元<br><br><strong>对宏观的影响：</strong><br>• 解禁高峰+被动资金被动配置效应是港股AI估值的"双刃剑"——短期可能压制估值，中长期被动资金流入仍构成支撑<br>• 与MiniMax（7/9解禁63%）、壁仞科技等多只硬科技股同步解禁→形成7月港股科技板块集中抛压<br>• 高估值AI股解禁后的回调可能蔓延至A股AI概念股，形成跨市场情绪传导<br><br><strong>对资金的影响：</strong><br>• 解禁后早期投资人"高浮盈兑现"动机强，参考历史经验高估值新股解禁往往伴随20-40%回调<br>• 公募QDII基金是智谱主要基石持有人，减持将影响QDII产品净值<br>• 被动资金（恒科ETF+港股通南向资金）短期承接力度是关键——若承接不足→估值进一步压缩<br>• 关注解禁首日（7/8）开盘表现：若跌幅超10%→可能触发同类AI股（MiniMax、壁仞）跟风抛售'},
  j67:{flag:'https://flagcdn.com/w40/hk.png',title:'MiniMax港股解禁(63%)',date:'7月9日 周四',html:'<span class="expand-tag released">已解禁</span><strong>7月9日解禁首日大跌：盘中一度跌超20%创近半年新低，14:20报289.6港元，市值跌破千亿至约908亿港元。</strong>与前一日智谱解禁逆势涨超13%形成鲜明对比——MiniMax抛压明显更重。<br><br>本轮解禁约1.46亿股、占港股股本约<strong>63%</strong>（财务型投资者占比高），是2026年港股最大单日解禁之一。尽管约八成股东表态不减持，仍难挡首日重挫；较3月高点1330港元（市值4100亿）已蒸发约3200亿港元。<br><br><strong>解读：</strong>高估值+高解禁比例+早期投资人低成本，抛压兑现压制反弹；港股AI板块"解禁潮"分化明显（智谱有机构护盘、MiniMax财务投资者占比高更承压）。<br><br><strong>关键信息：</strong><br>• 解禁比例：约<strong>63%</strong>（占港股股本）<br>• 财务型投资者占比：>1/3<br>• 6/8纳入恒生科技指数+港股通→被动资金提前布局对冲<br>• 与智谱、壁仞科技等同步解禁→7月港股AI板块集中调整<br><br><strong>对宏观的影响：</strong><br>• 63%解禁比例是港股近年罕见水平，可能引发短期流动性冲击→港股科技板块单日波动率显著放大<br>• 大规模解禁可能促使监管层关注"高估值+快速解禁"的市场风险，影响后续港股IPO定价机制<br>• 中长期看，被动资金（恒科ETF+港股通）若能承接→MiniMax估值锚定效应反而加强<br><br><strong>对资金的影响：</strong><br>• 解禁后财务型投资人"快速套现"动机强，可能出现连续3-5日抛压<br>• 公募QDII基金面临"是否参与基石锁定到期减持"的两难→若大规模减持将拖累QDII净值<br>• 南向资金（港股通）成为关键承接力量——若南向日均净流入超30亿港元→解禁压力可控<br>• 解禁冲击可能成为MiniMax、智谱等AI股中长期买入机会，参考2024年港股18A生物科技解禁后的反弹'},
  j68:{flag:'https://flagcdn.com/w40/cn.png',title:'宇树科技科创板挂牌上市',date:'7月底-8月初 待定(7/2注册生效)',html:'<span class="expand-tag pending">待挂牌</span><strong>★★★ A股"人形机器人第一股"。</strong>6月1日科创板过会，6月2日提交注册，证监会常规1-2个月内批复注册。综合机构预测，<strong>7月底-8月初</strong>正式登陆科创板（7/1证监会同意注册）。拟募资<strong>42.02亿元</strong>，保荐机构中信证券。<br><br><strong>关键信息：</strong><br>• 从3/20受理到6/1过会仅73天，创2026年迄今最快IPO纪录<br>• 2025年净利润5.9亿元，2026年Q1业绩继续高增长<br>• 全球人形机器人出货量第一，杭州"六小龙"之一<br>• 募资用途：智能模型研发+机器人本体研发+智能制造基地建设<br>• 预计发行不低于4,044.64万股A股<br><br><strong>对宏观的影响：</strong><br>• A股首家人形机器人上市公司，标志着具身智能产业进入资本化新阶段<br>• 中国人形机器人产业链从零部件→本体→算法→应用的资本市场布局完善<br>• 国家级"硬科技"导向明确：73天极速过会反映监管层对人形机器人赛道的强力支持<br>• 与长鑫科技（7-8月挂牌）、长江存储形成"硬科技IPO三剑客"——半导体+机器人共同支撑科创板估值锚<br><br><strong>对资金的影响：</strong><br>• 42亿元募资属中等规模，申购冻结资金预计<strong>500-800亿元</strong>，对A股流动性冲击有限<br>• 上市后估值参照：宇树科技作为全球人形机器人出货量第一企业，发行估值可能突破<strong>300-500亿元</strong><br>• 带动人形机器人板块：A股相关概念股（减速器、伺服电机、传感器）情绪催化<br>• 与长鑫科技前后脚上市→科创板"硬科技双星"格局形成，机构资金将分仓配置'},
- j69:{flag:'https://flagcdn.com/w40/cn.png',title:'华润新能源挂牌上市',date:'7月初 待定',html:'<span class="expand-tag released">已挂牌</span>华润新能源（华润电力子公司）在深交所主板挂牌上市，发行价10.11元/股，募资总额213.04亿元。<br><br><strong>关键信息：</strong><br>• 6/22网上网下申购，发行21.07亿股<br>• 主营风电、光伏电站投资运营<br>• 募资投向7.17GW风光电站项目<br>• 业绩连续三年下滑（风况偏弱+电价下行）<br><br><strong>对宏观的影响：</strong><br>• 央企新能源平台A股上市，反映新能源运营板块资本化持续推进<br>• 实际募资低于计划→市场对新能源运营板块估值偏谨慎<br><br><strong>对资金的影响：</strong><br>• 挂牌后预计纳入深证成指等指数→被动资金配置<br>• 与同期其他IPO共同构成7月A股新股供给压力，整体影响有限'},
+ j69:{flag:'https://flagcdn.com/w40/cn.png',title:'华润新能源挂牌上市',date:'7月2日 周四',html:'<span class="expand-tag released">已挂牌</span><strong>深市史上最大IPO：华润新能源(001248.SZ) 7/2深交所主板挂牌，发行价10.11元、募资213.04亿元；首日开盘21.6元(+113.65%)、收盘23.95元(+136.89%)，总市值突破3,100亿元。</strong><br><br>• 发行21.07亿股，发行后总股本130.06亿股<br>• 华润电力旗下风电/光伏电站运营平台，募投7.17GW风光项目<br><br><strong>对资金的影响：</strong>首日翻倍显示大盘蓝筹新股仍被追捧、打新赚钱效应延续；挂牌后料纳入深证成指等指数带来被动配置；央企新能源平台高溢价上市对同板块运营商估值有提振。'},
  j70:{flag:'https://flagcdn.com/w40/cn.png',title:'中际旭创港股IPO',date:'7月下旬 待定（7/17已过聆讯）',html:'<span class="expand-tag pending">待上市</span><strong>★★★ 港股2026年最大IPO——7/17已通过港交所上市聆讯，募资目标因路演认购踊跃从50亿美元上调至约70亿美元（约546亿港元），挂牌日期待发售公告确定。</strong><br><br><strong>最新进展：</strong><br>• 7/17通过港交所聆讯，联席保荐人：中金、广发证券、高盛、摩根士丹利<br>• 7/8获中国证监会备案通知书，拟发行不超过9,400.43万股H股<br>• 若足额募资70亿美元，将超越立讯精密（约242.66亿港元）成为2026年港股最大IPO<br>• A股代码300308.SZ，全球光模块龙头；2025年营收382.4亿元(+60%)、归母净利108亿元(+109%)<br><br><strong>对宏观的影响：</strong><br>• "AI基础设施资本化"关键里程碑，A+H双平台使中国AI产业链核心环节获国际定价<br>• 与WAIC元首站台同周推进，中国AI主线的产业+资本双催化<br><br><strong>对资金的影响：</strong><br>• 申购冻结资金预计1,500-2,500亿港元，对港股短期流动性有压制（7/17恒指跌超1.7%已部分计入供给压力）<br>• 挂牌后料快速纳入恒生科技指数，触发被动资金强制买入<br>• A股300308面临稀缺性下降与H股定价锚的双向拉扯；光模块产业链获情绪联动'},
- j71:{flag:'https://flagcdn.com/w40/cn.png',title:'核心医疗科创板IPO上会',date:'7月2日 周四',html:'<span class="expand-tag pending">待上会</span><strong>"人工心脏第一股"。</strong>6月25日上交所公告，上市审核委员会定于7月2日审议深圳核心医疗科技股份有限公司首发上市申请。拟募资<strong>12.17亿元</strong>，保荐机构中信证券。<br><br><strong>关键信息：</strong><br>• 全球唯一同时实现植入式与介入式人工心脏双线商业化的企业<br>• 科创板第五套上市标准重启后首家获受理的创新医疗器械企业<br>• 2025年11月6日获受理，2025年12月21日进入问询阶段<br>• 三年累计亏损4.7亿元，尚未盈利<br>• 专注于急慢性心衰重大临床需求<br><br><strong>对宏观的影响：</strong><br>• 科创板第五套标准重启→创新医疗器械上市通道拓宽，生物科技/医疗器械资本化制度进一步完善<br>• 人工心脏是高端医疗器械国产替代的标志性赛道，核心医疗上会通过将推动国产高端医疗器械产业信心<br><br><strong>对资金的影响：</strong><br>• 募资12.17亿元规模较小，对A股流动性影响有限<br>• 上会通过→医疗器械板块情绪催化，关注迈瑞医疗、微创医疗等对标企业<br>• 若未通过→科创板第五套标准信心受损，后续创新医疗器械IPO节奏可能放缓'},
+ j71:{flag:'https://flagcdn.com/w40/cn.png',title:'核心医疗科创板IPO上会',date:'7月2日 周四（审议取消）',html:'<span class="expand-tag released">已取消</span><strong>原定7/2的上市委审议会议在上会前48小时被临时取消——上交所公告因公司"尚有相关事项需要进一步核查"。</strong><br><br>• 争议焦点：国际期刊质疑其"全磁悬浮"技术定性、持续扩大的亏损与单一产品依赖、股权代持、募投项目变更、核心专利被申请无效等技术/财务/治理多重疑云<br>• 公司为科创板第五套标准重启后首家获受理的创新医疗器械企业（"人工心脏第一股"）；董事长7/14公开回应称问题出在药监局批文细节<br>• 重新上会时间待定<br><br><strong>对资金的影响：</strong>第五套标准重启后的标志性案例遇挫，未盈利医疗器械企业过审尺度收紧的信号——对Biotech/器械板块IPO预期偏空；短期无资金冻结影响。'},
  j72:{flag:'https://flagcdn.com/w40/us.png',title:'Sintra央行论坛',date:'7月1日 周三 21:30',html:'<span class="expand-tag released">已讲话</span><strong>Sintra政策小组（CNBC主持）：沃什、拉加德、贝利、麦克勒姆同台。整体基调偏鹰、无鸽派转向。</strong><br><br><strong>实际表态：</strong><br>• <strong>沃什（美联储）</strong>：强调“通胀仍然过高”，认可对AI/生产力保持开放，但坚持价格水平偏高；<strong>明确拒绝对7月利率决议给出暗示</strong><br>• <strong>贝利（英央行）</strong>：警示金融稳定尾部风险——政府债市场杠杆上升、对冲基金股票杠杆走高，需持续监控<br>• <strong>拉加德（欧央行）</strong>：聚焦欧洲AI竞争力，称欧美在前沿科技上“互为人质”，欧洲既需要前沿企业也需要市场<br><br><strong>解读：</strong>沃什回避反应函数→7月FOMC定价分歧加大；多位行长强调通胀与金融稳定，缺乏降息信号，短端利率与美元获支撑。<br><br><strong>对资金的影响：</strong>鹰派沟通→美债短端偏承压、美元偏强；贝利的金融稳定警告提示高杠杆资产波动风险，利多黄金避险属性。'},
  j73:{flag:'https://flagcdn.com/w40/us.png',title:'ADP私营就业',date:'7月1日 周三 20:15',html:'<span class="expand-tag released">已发布</span><strong>6月ADP私营就业 +9.8万，低于预期约11万、较5月+12.2万继续放缓。</strong>由于7月2日非农提前发布，ADP是NFP前最后一个劳动力市场预演。<br><br><strong>分项：</strong><br>• 教育健康+4.8万（近半增量），贸易运输公用事业+1.5万、金融+1.4万<br>• 自然资源与采矿-0.5万（唯一收缩），休闲酒店仅+0.2万→消费需求前瞻偏弱<br>• 留任者年薪增速持平4.4%、跳槽者升至6.6%<br>• ADP首席经济学家：找工作耗时变长，招聘整体放缓<br><br><strong>解读：</strong>就业走弱，与当日ISM就业分项仍收缩相互印证，市场重新押注9月降息。留意7/2非农是否同步走弱（若背离则抬升对8月JOLTS/初请的敏感度）。<br><br><strong>对资金的影响：</strong>就业转弱→美债收益率下行、利多黄金与久期资产；美元短线走弱，但周期股受增长担忧压制。'},
  j74:{flag:'https://flagcdn.com/w40/un.png',title:'OPEC+复核8月产量计划',date:'7月5日 周日',html:'<span class="expand-tag released">已决议</span><strong>7月5日线上会议：七国决定8月增产18.8万桶/日，与7月同步幅度，延续逐月退出自愿减产。</strong>参与国：沙特、俄罗斯、伊拉克、科威特、哈萨克斯坦、阿尔及利亚、阿曼（无UAE）。<br><br><strong>要点：</strong><br>• 连续第五个月增产，节奏维持不变——未因霍尔木兹/中东局势暂停，显示OPEC+优先夺回市场份额<br>• 声明重申"支持市场稳定、并保留视情况调整的灵活性"<br>• 增产为2023年4月起额外自愿减产的逐步解除<br><br><strong>对宏观的影响：</strong><br>• 供给按计划回归→缓解油价上行压力，利于美欧CPI能源项降温、给央行更多空间<br>• 但实际增量常低于名义配额（部分国家产能受限），叠加中东航运风险，实际供给弹性有限<br><br><strong>对资金的影响：</strong><br>• 名义增产偏空油价→能源股承压、航空/运输受益、通胀交易降温<br>• 若地缘扰动（霍尔木兹）再起→布伦特易重新测高，黄金/美元受避险与通胀预期牵引<br>• 下一次八国会（约8月初）将定9月产量，关注退出进程是否临近尾声'},
@@ -512,11 +512,6 @@ const eventData = {
  s51:{flag:'https://flagcdn.com/w40/us.png',title:'ADP私营就业',date:'9月2日 周三 20:15',html:'<span class="expand-tag pending">待发布</span><strong>8月ADP私营就业报告。</strong>非农（9/4）前的劳动力市场预演。<br><br>• 私营就业增量与工资增速是服务通胀与9月FOMC降息定价的关键<br>• 强ADP+强NFP→9月降息押注降温、美元走强；弱ADP+弱NFP→降息预期强化<br>• 若ADP与NFP背离，市场对同周JOLTS（9/1）和初请更敏感'},
  j75:{flag:'https://flagcdn.com/w40/us.png',title:'美联储褐皮书',date:'7月16日 周四 02:00',html:'<span class="expand-tag released">已发布</span><strong>7月褐皮书：12个地区中11个经济活动"轻微至温和"扩张、1个持平（较上期改善）；价格整体温和上涨，关税叠加中东冲突推高能源与原材料等非劳动力成本。</strong><br><br>• 经济活动：消费温和增长但受油价上涨拖累；制造业在数据中心、机械、国防板块增长明显；建筑与地产小幅回升<br>• 就业：整体改善——5个地区温和/稳健增长、7个基本持平；技工/技术岗仍难招，工资"温和"增长<br>• 价格：9个地区温和、2个强劲、1个轻微上涨；能源、运输、原材料成本上行<br>• 关税：与中东冲突一并被列为投入成本上升主因<br><br><strong>对宏观的影响：</strong><br>• "活动改善+价格压力粘"偏滞胀→为7/28-29 FOMC 保持谨慎/偏鹰提供依据<br>• 但与7/14-15 CPI/PPI降温形成张力，联储需在"成本传导"与"终端通胀回落"间权衡<br><br><strong>对资金的影响：</strong><br>• 数据中心/国防/机械需求强→利多相关工业金属需求叙事<br>• 能源与原材料成本压力延续→通胀预期不易快速回落，制约降息节奏预期'},
 
- e64:{flag:'https://flagcdn.com/w40/us.png',title:'卡什卡利讲话',date:'6月26日 周五 23:30',html:'<span class="expand-tag released">已讲话</span><strong>实际表态：卡什卡利称自己已把利率路径预期从3月的“年内降息一次”调整为6月的“年内加息一次”，强调通胀风险仍偏上行，政策需要保持灵活。</strong><br><br><strong>核心信息：</strong><br>• 对通胀更担忧：关税、能源与服务业价格压力可能使通胀回落速度慢于预期<br>• 对就业仍谨慎：劳动力市场有降温迹象，但不足以让美联储忽视通胀风险<br>• 对政策路径的含义：卡什卡利从偏鸽转向偏鹰，支持6月FOMC点阵图更高利率路径<br><br><strong>市场解读：</strong>这次讲话强化了“美联储内部鹰派重估”的叙事。密歇根通胀预期回落缓和了部分压力，但卡什卡利转向加息预期，说明联储仍会把实际通胀读数置于更高优先级。<br><br><strong>对宏观的影响：</strong><br>• 7月FOMC大概率继续维持利率不变，但声明和新闻发布会难以转鸽<br>• 9月降息窗口继续收窄，市场会更多讨论“更久维持高利率”甚至年内加息尾部风险<br>• 若6月CPI/PCE继续走高，卡什卡利讲话可能成为FOMC进一步鹰派化的前置信号<br><br><strong>对资金的影响：</strong><br>• 美债短端收益率对鹰派讲话更敏感，2年期收益率上行风险增加<br>• 美元获得支撑，黄金短线承压但通胀保值需求限制下行<br>• 高估值科技股对利率重估敏感，AI/IPO虹吸叠加高利率叙事会放大波动'},
- e66:{flag:'https://flagcdn.com/w40/eu.png',title:'ECB辛特拉中央银行论坛',date:'6月29日 周一-7月1日 周三',html:'<span class="expand-tag released">进行中</span><strong>ECB辛特拉论坛已开幕，拉加德为6月加息辩护。</strong><br><br><strong>核心表态：</strong><br>• 拉加德称6月加息不是“保险式加息”，而是基于通胀预测和情景分析的必要决策<br>• 她强调欧元区通胀仍高于目标，若不加息，通胀回到2%的时间可能进一步后移<br>• ECB仍坚持逐次会议、数据依赖，不给固定利率路径承诺<br><br><strong>市场解读：</strong>辛特拉论坛强化了ECB“温和但仍偏鹰”的基调。7月23日ECB决议仍是关键：若能源风险和通胀预期不降，市场会继续定价后续加息；若油价回落和增长转弱，ECB可能放慢节奏。'},
- e67:{flag:'https://flagcdn.com/w40/ch.png',title:'美伊技术谈判跟踪',date:'6月30日 周二 持续跟踪',html:'<span class="expand-tag pending">持续跟踪</span><strong>美伊谈判未见6月30日单独结果公告，改为持续跟踪。</strong><br><br>上周瑞士谈判后，技术团队据报继续留在当地讨论制裁、核查和霍尔木兹通航机制。但周末局势再度紧张，谈判仍处于“边谈边斗”的脆弱状态。<br><br><strong>对宏观的影响：</strong>若技术层面能形成通航和制裁执行路线图，能源风险溢价会继续回落；若谈判破裂或霍尔木兹船舶通行继续受阻，油价、黄金和美元避险交易会重新升温。'},
- e68:{flag:'https://flagcdn.com/w40/us.png',title:'美国房价指数',date:'6月30日 周二 21:00',html:'<span class="expand-tag pending">待发布</span><strong>美国4月FHFA房价指数与S&P CoreLogic Case-Shiller房价指数。</strong>房价数据会影响住房通胀、居民资产负债表和地产链情绪。若房价继续坚挺，服务通胀和租金粘性的担忧会升温；若明显降温，长端利率和地产股可能获得缓冲。'},
- e69:{flag:'https://flagcdn.com/w40/us.png',title:'美国芝加哥PMI',date:'6月30日 周二 21:45',html:'<span class="expand-tag pending">待发布</span><strong>美国6月芝加哥商业景气指数。</strong>这是ISM制造业前的区域制造业观察窗口，关注新订单、就业和价格分项。若与S&P制造业PMI背离，市场会更重视7月1日ISM制造业PMI。'},
  j76:{flag:'https://flagcdn.com/w40/us.png',title:'美国初请失业金',date:'7月2日 周四 20:30',html:'<span class="expand-tag released">已发布</span><strong>初请维持低位（近周约21.5万、四周均值约22.4万），未见裁员激增。</strong>这与同日非农"招聘放缓但裁员未起"的图景一致——就业降温更多来自新增岗位减少、而非解雇上升。<br><br>初请低位本支持"就业仍有韧性"，但被大幅走弱的非农盖过，市场焦点仍在招聘端崩塌与参与率下滑。后续关注初请是否从低位抬头以确认拐点。'},
  j77:{flag:'https://flagcdn.com/w40/us.png',title:'美国工厂订单',date:'7月2日 周四 22:00',html:'<span class="expand-tag released">已发布</span><strong>5月核心工厂订单（除运输）环比+1.9%，较4月+1.3%加速，制造业需求边际改善。</strong><br><br>剔除波动较大的运输后，企业对设备和制成品的需求在春末继续走强，与ISM新订单仍在扩张相互印证。<br><br><strong>解读：</strong>硬数据端（工厂订单）比就业端更有韧性，形成"需求尚可、用工降温"的分化。对铜、铝等工业金属的实体需求是边际正面信号，但就业走弱带来的终端需求隐忧仍压制情绪。'},
  j78:{flag:'https://flagcdn.com/w40/us.png',title:'美股美债休市',date:'7月3日 周五',html:'<span class="expand-tag released">已休市</span><strong>美国股市与债市因独立日观察日休市（独立日7/4逢周六，主要市场提前于周五休假）。</strong>当日无美国数据发布。<br><br><strong>市场语境：</strong><br>• 市场进入长周末，消化7/2走弱的6月非农（+5.7万、参与率跌至61.5%）——降息预期升温、美债收益率与美元在周四已先行回落<br>• 美盘休市下全球流动性偏薄，外盘商品与非美资产延续对"就业弱+9月降息"定价，但缺乏美债定价锚、易现放大波动<br>• 焦点转向下周：7/9中国CPI/PPI、7/14美国6月CPI，验证"通胀能否配合降息"是关键<br><br><em>注：7/6（周一）美股恢复交易。</em>'},
@@ -768,11 +763,12 @@ function showDetail(el) {
  const panelTitle = document.getElementById('panelTitle');
  const panelDate = document.getElementById('panelDate');
  const panelBody = document.getElementById('panelBody');
- if (panel.classList.contains('open') && panelTitle.textContent === data.title) {
+ if (panel.classList.contains('open') && panel.dataset.eventId === id) {
   panel.classList.remove('open');
   return;
  }
  if(data.flag && data.flag.startsWith('http')) { panelFlag.src = data.flag; panelFlag.style.display = 'block'; } else { panelFlag.style.display = 'none'; }
+ panel.dataset.eventId = id;
  panelTitle.textContent = data.title;
  panelDate.textContent = data.date;
  panelBody.innerHTML = data.html;
