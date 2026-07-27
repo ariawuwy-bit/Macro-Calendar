@@ -247,6 +247,14 @@
 </div>
 
 <script>
+// ========== SHARED HELPERS ==========
+const FLAG_BASE = 'https://flagcdn.com/w20/';
+function pillInner(ev) {
+  let h = ev.flag ? '<img class="pill-flag" src="' + FLAG_BASE + ev.flag + '.png" alt="" onerror="this.style.display=\'none\'"> ' : '';
+  h += ev.name;
+  if (ev.stars) h += ' <span class="pill-stars">' + ev.stars + '</span>';
+  return h;
+}
 // ========== MONTH RANGE LOGIC ==========
 let visibleMonths = [];
 let currentIdx = 0; // index into visibleMonths
@@ -720,9 +728,7 @@ function renderCalendar(year, month) {
    pill.className = 'event-pill ' + ev.cls;
    pill.setAttribute('data-id', ev.id);
    pill.onclick = function() { showDetail(this); };
-   let html = ev.flag ? '<img class="pill-flag" src="https://flagcdn.com/w20/' + ev.flag + '.png" alt="" onerror="this.style.display=\'none\'"> ' : ''; html += ev.name;
-   if (ev.stars) html += ' <span class="pill-stars">' + ev.stars + '</span>';
-   pill.innerHTML = html;
+   pill.innerHTML = pillInner(ev);
    cell.appendChild(pill);
   });
   grid.appendChild(cell);
@@ -738,9 +744,7 @@ function renderCalendar(year, month) {
  if (data.midMonth && data.midMonth.pills.length > 0) {
   let html = '<div class="mid-month-box"><div class="mid-month-title">' + data.midMonth.title + '</div><div class="mid-month-pills">';
   data.midMonth.pills.forEach(p => {
-   html += '<div class="event-pill ' + p.cls + '" data-id="' + p.id + '" onclick="showDetail(this)">' + (p.flag ? '<img class="pill-flag" src="https://flagcdn.com/w20/' + p.flag + '.png" alt="" onerror="this.style.display=\'none\'"> ' : '') + p.name;
-   if (p.stars) html += ' <span class="pill-stars">' + p.stars + '</span>';
-   html += '</div>';
+   html += '<div class="event-pill ' + p.cls + '" data-id="' + p.id + '" onclick="showDetail(this)">' + pillInner(p) + '</div>';
   });
   html += '</div></div>';
   midEl.innerHTML = html;
